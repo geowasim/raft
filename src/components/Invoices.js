@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { AiOutlinePlus } from "react-icons/ai";
-import Todo from "./Todo";
+import OneInvoice from "./OneInvoice";
 import { db } from "../firebase";
 import {
   query,
@@ -10,11 +9,12 @@ import {
   doc,
   addDoc,
   deleteDoc,
+  orderBy,
 } from "firebase/firestore";
 
 const style = {
   bg: `h-screen w-screen p-4 bg-gradient-to-r from-[#2F80ED] to-[#1CB5E0]`,
-  container: `bg-slate-100 max-w-[500px] w-full m-auto rounded-md shadow-xl p-4`,
+  container: `bg-slate-100 max-w-[90vw] w-full m-auto rounded-md shadow-xl p-4`,
   heading: `text-3xl font-bold text-center text-gray-800 p-2`,
   form: `flex justify-between`,
   input: `border p-2 w-full text-xl`,
@@ -26,7 +26,69 @@ function Invoices() {
   const [todos, setTodos] = useState([]);
   const [input, setInput] = useState("");
 
-  // Create todo
+  // Read todo from firebase
+  useEffect(() => {
+    const q = query(collection(db, "todos"), orderBy("invoiceNumber", "desc"));
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      let todosArr = [];
+      querySnapshot.forEach((doc) => {
+        todosArr.push({ ...doc.data(), id: doc.id });
+      });
+      setTodos(todosArr);
+      console.log("todosArr", todosArr[0].invoiceNumber.sn);
+      console.log("todosArr", todosArr);
+    });
+    return () => unsubscribe();
+  }, []);
+
+  // Update todo in firebase
+  const toggleComplete = async (todo) => {
+    await updateDoc(doc(db, "todos", todo.id), {
+      completed: !todo.completed,
+    });
+  };
+
+  // Delete todo
+  const deleteTodo = async (id) => {
+    await deleteDoc(doc(db, "todos", id));
+  };
+
+  return (
+    <div className={style.bg}>
+      <div className={style.container}>
+        <h3 className={style.heading}>Invoices</h3>
+        <table className="customers" style={{ width: "80%" }}>
+          <tr>
+            <th>Order#</th>
+            <th>Total</th>
+            <th>Qty</th>
+            <th>Payment Method</th>
+            <th>Date & Time</th>
+          </tr>
+        </table>
+        <ul>
+          {todos.map((todo, index) => (
+            <OneInvoice
+              key={index}
+              todo={todo}
+              toggleComplete={toggleComplete}
+              deleteTodo={deleteTodo}
+            />
+          ))}
+        </ul>
+        {todos.length < 1 ? null : (
+          <p className={style.count}>{`You have ${todos.length} todos`}</p>
+        )}
+      </div>
+      {/* <div>{todos.forEach((x) => console.log(x))}</div> */}
+    </div>
+  );
+}
+
+export default Invoices;
+
+/**
+ * // Create todo
   const createTodo = async (e) => {
     e.preventDefault(e);
     if (input === "") {
@@ -60,73 +122,13 @@ function Invoices() {
       invoiceNumber: {
         sn: 1000002,
       },
-      users: {
-        name: "expo",
-        role: "2",
+      sum: {
+        qty: 2,
+        subtotal: 398,
+        total: 457.7,
       },
     });
     setInput("");
   };
-
-  // Read todo from firebase
-  useEffect(() => {
-    const q = query(collection(db, "todos"));
-    const unsubscribe = onSnapshot(q, (querySnapshot) => {
-      let todosArr = [];
-      querySnapshot.forEach((doc) => {
-        console.log("doc", doc.data());
-        todosArr.push({ ...doc.data(), id: doc.id });
-      });
-      setTodos(todosArr);
-    });
-    return () => unsubscribe();
-  }, []);
-
-  // Update todo in firebase
-  const toggleComplete = async (todo) => {
-    await updateDoc(doc(db, "todos", todo.id), {
-      completed: !todo.completed,
-    });
-  };
-
-  // Delete todo
-  const deleteTodo = async (id) => {
-    await deleteDoc(doc(db, "todos", id));
-  };
-
-  return (
-    <div className={style.bg}>
-      <div className={style.container}>
-        <h3 className={style.heading}>Todo Main</h3>
-        <form onSubmit={createTodo} className={style.form}>
-          <input
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            className={style.input}
-            type="text"
-            placeholder="Add Todo"
-          />
-          <button className={style.button}>
-            <AiOutlinePlus size={30} />
-          </button>
-        </form>
-        <ul>
-          {todos.map((todo, index) => (
-            <Todo
-              key={index}
-              todo={todo}
-              toggleComplete={toggleComplete}
-              deleteTodo={deleteTodo}
-            />
-          ))}
-        </ul>
-        {todos.length < 1 ? null : (
-          <p className={style.count}>{`You have ${todos.length} todos`}</p>
-        )}
-      </div>
-      <div>{todos.forEach((x) => console.log(x))}</div>
-    </div>
-  );
-}
-
-export default Invoices;
+ * 
+ */

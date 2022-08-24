@@ -23,14 +23,14 @@ const InputCash = (props) => {
     let a = val;
     let b = val2;
     if (a > b || b === "") {
-      setIsPrintShown(false);
+      setIsPrintShown("isPrintShownF", false);
       alert("تأكد من المبلغ المستلم");
       props.handleRestCount2();
 
       return;
     }
     setValue(a - b);
-    setIsPrintShown(true);
+    setIsPrintShown("isPrintShownT", true);
   };
 
   const handleRest = () => {

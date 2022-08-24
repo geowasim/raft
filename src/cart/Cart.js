@@ -1,10 +1,23 @@
 import { useEffect, useRef, useState } from "react";
 import { useReactToPrint } from "react-to-print";
+import { db } from "../firebase";
+import {
+  query,
+  collection,
+  onSnapshot,
+  updateDoc,
+  doc,
+  addDoc,
+  deleteDoc,
+  orderBy,
+  serverTimestamp,
+} from "firebase/firestore";
+
 import { ComponentToPrint } from "../ComponentToPrint/ComponentToPrint";
 
-import "./Cart.css";
-import MyImage from "../img/QandellaCompanyLogo1.png";
 import Payment from "../payments/Payment";
+
+import "./Cart.css";
 
 const Basket = (props) => {
   const {
@@ -19,6 +32,7 @@ const Basket = (props) => {
   const [isCachDone, setIsCachDone] = useState(false);
   const [paidMoney, setPaidMoney] = useState(null);
   const [change, setChange] = useState(null);
+  const [serialNumber, setSerialNumber] = useState(null);
 
   const itemsPrice = cartItems.reduce((a, c) => a + c.price * c.qty, 0);
   const totalItems = cartItems.reduce((a, c) => a + c.qty, 0);
@@ -50,6 +64,37 @@ const Basket = (props) => {
 
   const isChange = (value) => {
     setChange(value <= 0 ? (value * -1).toFixed(2) : "");
+  };
+
+  //get lastSn //
+  //get data frm const {second} = first
+  // Read todo from firebase
+  useEffect(() => {
+    const q = query(collection(db, "todos"), orderBy("invoiceNumber", "desc"));
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      let todosArr = [];
+      querySnapshot.forEach((doc) => {
+        todosArr.push({ ...doc.data(), id: doc.id });
+      });
+      console.log("1", serialNumber);
+      setSerialNumber(todosArr[0].invoiceNumber.sn + 1);
+      console.log("2", serialNumber);
+    });
+    return () => unsubscribe();
+  }, []);
+  // Create invoice
+  const createInvoice = async () => {
+    await addDoc(collection(db, "todos"), {
+      methodArray: {
+        method: "Mada",
+      },
+      cartItems: cartItems,
+      invoiceNumber: {
+        sn: serialNumber,
+      },
+
+      date: serverTimestamp(),
+    });
   };
 
   return (
@@ -158,6 +203,7 @@ const Basket = (props) => {
                     resetCartItems();
                     handleData();
                     handleIsPrint();
+                    createInvoice();
                   }}
                 >
                   الدفع - طباعة

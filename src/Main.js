@@ -46,6 +46,9 @@ function Main() {
     ]
   );
 
+  useEffect(() => {
+    console.log(isPrint);
+  });
   // getData for component
   useEffect(() => {
     const items = JSON.parse(localStorage.getItem("SN"));
