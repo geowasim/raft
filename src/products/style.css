@@ -1,0 +1,57 @@
+img {
+  width: 100px;
+}
+
+.products {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+  border-right: 2px solid #cccbcb;
+  border-top: 2px solid #cccbcb;
+  overflow: hidden;
+}
+
+.card {
+  display: flex;
+  width: 100%;
+  border-bottom: 1px solid #cccbcb;
+  justify-content: space-between;
+  align-items: center;
+  padding: 3px 12px;
+  cursor: pointer;
+}
+.card:hover,
+.card:focus {
+  background-color: #1899d6;
+}
+
+img {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 5px;
+  width: 75px;
+}
+
+.productDes p {
+  font-size: 15px;
+}
+
+.perfume {
+  background-color: #d5ffe933;
+}
+.hairMist {
+  background-color: #e6dbb64d;
+}
+
+.odor {
+  background-color: #f2d0ff4d;
+}
+
+.b1 {
+  background-color: rgba(19, 19, 113, 0.2);
+}
+
+.product-category p {
+  font-size: 18px;
+}

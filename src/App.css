@@ -1,0 +1,67 @@
+@import url("https://fonts.googleapis.com/css2?family=Readex+Pro&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Markazi+Text&display=swap");
+
+.App {
+  text-align: center;
+  font-family: "Readex Pro", sans-serif;
+
+  background-color: #f9faf5;
+  display: flex;
+}
+
+.App-logo {
+  height: 20vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 10s linear;
+  }
+}
+
+.App-header {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  font-size: calc(10px + 2vmin);
+  color: rgba(0, 0, 0, 0.8);
+  width: 25vw;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.links {
+  display: flex;
+  list-style: none;
+  margin: 5px 15px;
+}
+
+.links li {
+  margin-left: 20px;
+}
+
+.links li a {
+  text-decoration: none;
+}
+
+.chooseItem {
+  width: 33vw;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  font-size: 25px;
+  font-family: "Readex Pro", sans-serif;
+}

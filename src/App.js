@@ -1,27 +1,34 @@
 import React from "react";
-import Signin from "./components/pages/Signin";
-import Signup from "./components/pages/Signup";
-import Account from "./components/Account";
-import { Route, Routes } from "react-router-dom";
+import Signin from "./pages/Signin";
+import Signup from "./pages/Signup";
+import { Route, Routes, Link } from "react-router-dom";
 import { AuthContextProvider } from "./context/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
-import Main from "./components/Main";
+import Invoices from "./components/Invoices";
+import Pos from "./pages/Pos";
 
 function App() {
   return (
     <div>
-      <h1 className="text-center text-3xl font-bold">
-        Firebase Auth & Context
-      </h1>
       <AuthContextProvider>
+        <nav>
+          <ul className="links">
+            <li>
+              <Link to="/pos">Home</Link>
+            </li>
+            <li>
+              <Link to="/invoices">Invoices</Link>
+            </li>
+          </ul>
+        </nav>
         <Routes>
           <Route path="/" element={<Signin />} />
           <Route path="/signup" element={<Signup />} />
           <Route
-            path="/account"
+            path="/pos"
             element={
               <ProtectedRoute>
-                <Account />
+                <Pos />
               </ProtectedRoute>
             }
           />
@@ -29,7 +36,7 @@ function App() {
             path="/invoices"
             element={
               <ProtectedRoute>
-                <Main />
+                <Invoices />
               </ProtectedRoute>
             }
           />

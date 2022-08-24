@@ -1,0 +1,80 @@
+.payments {
+  width: inherit;
+  display: flex;
+  align-content: space-around;
+  height: 120px;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  margin-top: 10px;
+}
+.mada {
+  font-family: Readex Pro, sans-serif;
+  font-weight: 200;
+}
+.madaItems {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 30px;
+  font-weight: 200;
+}
+.change {
+  display: flex;
+  position: absolute;
+  bottom: 86px;
+  right: 1.5vw;
+  background-color: #1899d6;
+  height: 15px;
+  justify-content: center;
+  align-items: center;
+  font-weight: 200;
+}
+
+.tp {
+  border-radius: 5px;
+  color: 4e4d4d;
+  padding: 10px;
+  font-family: Readex Pro, sans-serif;
+  font-weight: 200;
+}
+
+.cacheContainer {
+  font-family: Readex Pro, sans-serif;
+  font-weight: 200;
+  margin-top: 24px;
+  font-size: 12px;
+}
+
+.cachChange {
+  margin-top: 5px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.remain {
+  position: absolute;
+  bottom: 190;
+  right: 35%;
+  width: 150px;
+  margin-top: 5px;
+  font-size: 18px;
+  font-weight: bold;
+  border: 1px dotted;
+  padding: 5px 5px;
+  display: flex;
+  flex-direction: column;
+}
+
+.printFromCach {
+  position: absolute;
+  display: flex;
+  right: 25%;
+  width: auto;
+  padding: 0 50px;
+  height: 35px;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+  bottom: 120px;
+}

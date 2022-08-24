@@ -1,21 +1,21 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { UserAuth } from "../../context/AuthContext";
+import { UserAuth } from "../context/AuthContext";
 
-const Signup = () => {
+const Signin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const { createUser } = UserAuth();
   const navigate = useNavigate();
+  const { signIn } = UserAuth();
 
   console.log(error);
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
     try {
-      await createUser(email, password);
-      navigate("/account");
+      await signIn(email, password);
+      navigate("/pos");
     } catch (e) {
       setError(e.message);
       console.log(e.message);
@@ -25,11 +25,11 @@ const Signup = () => {
   return (
     <div className="max-w-[700px] mx-auto my-16 p-4">
       <div>
-        <h1 className="text-2xl font-bold py-2">Sign up for a free account</h1>
+        <h1 className="text-2xl font-bold py-2">Sign in to your account</h1>
         <p className="py-2">
-          Already have an account yet?{" "}
-          <Link to="/" className="underline">
-            Sign in.
+          Don't have an account yet?{" "}
+          <Link to="/signup" className="underline">
+            Sign up.
           </Link>
         </p>
       </div>
@@ -51,11 +51,11 @@ const Signup = () => {
           />
         </div>
         <button className="border border-blue-500 bg-blue-600 hover:bg-blue-500 w-full p-4 my-2 text-white">
-          Sign Up
+          Sign In
         </button>
       </form>
     </div>
   );
 };
 
-export default Signup;
+export default Signin;

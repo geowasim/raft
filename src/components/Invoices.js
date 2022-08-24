@@ -22,7 +22,7 @@ const style = {
   count: `text-center p-2`,
 };
 
-function Main() {
+function Invoices() {
   const [todos, setTodos] = useState([]);
   const [input, setInput] = useState("");
 
@@ -129,4 +129,4 @@ function Main() {
   );
 }
 
-export default Main;
+export default Invoices;

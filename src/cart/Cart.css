@@ -1,0 +1,127 @@
+.basketContainer {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  right: 5vw;
+  width: 33vw;
+}
+.basket {
+  color: #fff;
+  text-align: center;
+  flex: 1;
+  margin-top: 30px;
+  left: 59vw;
+  width: inherit;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  height: 80%;
+}
+
+.basket::before {
+  content: "";
+  height: 100%;
+  width: 2px;
+
+  position: absolute;
+  left: 0;
+  top: 26px;
+  background-color: #d9d9d9;
+}
+.basket::after {
+  content: "";
+  height: 100%;
+  width: 2px;
+
+  position: absolute;
+  right: 0;
+  top: 26px;
+  background-color: #d9d9d9;
+}
+hr {
+  width: 100%;
+}
+.cartLogo {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 9px;
+  flex-direction: column;
+  font-size: 15px;
+}
+.cartLogo img {
+  box-shadow: none;
+  width: 160px;
+}
+.row {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  /* border-bottom: 1px dotted whitesmoke; */
+  height: 33px;
+  color: #4e4d4d;
+  font-family: Readex Pro, sans-serif;
+}
+.basketName {
+  margin-bottom: 25px;
+  color: #4e4d4d;
+  font-family: Readex Pro, sans-serif;
+}
+.basketTitle {
+  color: #4e4d4d;
+  flex: 1;
+}
+.basketIND {
+  color: #4e4d4d;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.basketQT {
+  flex: 1;
+}
+
+.add,
+.remove {
+  width: 30px;
+  height: 30px;
+  margin-left: 15px;
+  border-radius: 5px;
+  font-size: 25px;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.totalPrice {
+  margin-top: 20px;
+}
+
+.paymentArea {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+}
+
+.pay {
+  position: absolute;
+  bottom: 120px;
+  right: 1.5vw;
+  font-size: 2rem;
+}
+
+.copyRights {
+  color: rgba(213, 210, 210, 0.2);
+}
