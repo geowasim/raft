@@ -1,6 +1,6 @@
 import React from "react";
-import Signin from "./components/pages/Signin";
-import Signup from "./components/pages/Signup";
+import Signin from "./components/Signin";
+import Signup from "./components/Signup";
 import Account from "./components/Account";
 import { Route, Routes } from "react-router-dom";
 import { AuthContextProvider } from "./context/AuthContext";

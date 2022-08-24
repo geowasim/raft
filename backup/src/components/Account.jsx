@@ -24,8 +24,6 @@ const Account = () => {
       <button onClick={handleLogout} className="border px-6 py-2 my-4">
         Logout
       </button>
-
-      <div>Everything is here </div>
     </div>
   );
 };
