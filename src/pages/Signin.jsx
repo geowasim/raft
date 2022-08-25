@@ -27,10 +27,10 @@ const Signin = () => {
       <div>
         <h1 className="text-2xl font-bold py-2">Sign in to your account</h1>
         <p className="py-2">
-          Don't have an account yet?{" "}
-          <Link to="/signup" className="underline">
+          {/* Don't have an account yet?{" "} */}
+          {/* <Link to="/signup" className="underline">
             Sign up.
-          </Link>
+          </Link> */}
         </p>
       </div>
       <form onSubmit={handleSubmit}>

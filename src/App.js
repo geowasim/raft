@@ -23,7 +23,7 @@ function App() {
         </nav>
         <Routes>
           <Route path="/" element={<Signin />} />
-          <Route path="/signup" element={<Signup />} />
+          {/* <Route path="/signup" element={<Signup />} /> */}
           <Route
             path="/pos"
             element={

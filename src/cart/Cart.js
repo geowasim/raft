@@ -3,7 +3,6 @@ import { useReactToPrint } from "react-to-print";
 import { ComponentToPrint } from "../ComponentToPrint/ComponentToPrint";
 
 import "./Cart.css";
-import MyImage from "../img/QandellaCompanyLogo1.png";
 import Payment from "../payments/Payment";
 
 import { db } from "../firebase";
@@ -11,12 +10,12 @@ import {
   query,
   collection,
   onSnapshot,
-  updateDoc,
-  doc,
   addDoc,
-  deleteDoc,
   orderBy,
   serverTimestamp,
+  // updateDoc,
+  // doc,
+  // deleteDoc,
 } from "firebase/firestore";
 
 const Basket = (props) => {
