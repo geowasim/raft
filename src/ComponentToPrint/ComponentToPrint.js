@@ -106,6 +106,10 @@ export const ComponentToPrint = React.forwardRef((props, ref) => {
                 {(itemsPrice * 15) / 100 + itemsPrice} SAR
               </h4>
             </div>
+            <div className="L1">
+              <p> payment by : طريقة الدفع </p>
+              <p>{method === "Mada" ? "Mada(مدى)" : "Cash(كاش)"}</p>
+            </div>
             {method === "Mada" ? (
               <div className="L1">
                 <p> Received: المبلغ المستلم</p>
