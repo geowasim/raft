@@ -1,5 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import { useReactToPrint } from "react-to-print";
+import { ComponentToPrint } from "../ComponentToPrint/ComponentToPrint";
+
+import "./Cart.css";
+import MyImage from "../img/QandellaCompanyLogo1.png";
+import Payment from "../payments/Payment";
+
 import { db } from "../firebase";
 import {
   query,
@@ -13,26 +19,12 @@ import {
   serverTimestamp,
 } from "firebase/firestore";
 
-import { ComponentToPrint } from "../ComponentToPrint/ComponentToPrint";
-
-import Payment from "../payments/Payment";
-
-import "./Cart.css";
-
 const Basket = (props) => {
-  const {
-    cartItems,
-    resetCartItems,
-    onAdd,
-    onRemove,
-    handleData,
-    handleIsPrint,
-  } = props;
+  const { cartItems, resetCartItems, onAdd, onRemove, handleIsPrint } = props;
   const [method, setMethod] = useState("Mada");
   const [isCachDone, setIsCachDone] = useState(false);
   const [paidMoney, setPaidMoney] = useState(null);
   const [change, setChange] = useState(null);
-  const [serialNumber, setSerialNumber] = useState(null);
 
   const itemsPrice = cartItems.reduce((a, c) => a + c.price * c.qty, 0);
   const totalItems = cartItems.reduce((a, c) => a + c.qty, 0);
@@ -66,6 +58,8 @@ const Basket = (props) => {
     setChange(value <= 0 ? (value * -1).toFixed(2) : "");
   };
 
+  const [serialNumber, setSerialNumber] = useState(null);
+
   //get lastSn //
   //get data frm const {second} = first
   // Read todo from firebase
@@ -76,17 +70,16 @@ const Basket = (props) => {
       querySnapshot.forEach((doc) => {
         todosArr.push({ ...doc.data(), id: doc.id });
       });
-      console.log("1", serialNumber);
       setSerialNumber(todosArr[0].invoiceNumber.sn + 1);
-      console.log("2", serialNumber);
     });
     return () => unsubscribe();
   }, []);
+
   // Create invoice
   const createInvoice = async () => {
     await addDoc(collection(db, "todos"), {
       methodArray: {
-        method: "Mada",
+        method: method,
       },
       cartItems: cartItems,
       invoiceNumber: {
@@ -142,7 +135,7 @@ const Basket = (props) => {
                 method={method}
                 paidMoney={paidMoney}
                 change={change}
-                handleData={handleData}
+                serialNumber={serialNumber}
               />
               {/* ------------ */}
             </div>
@@ -192,8 +185,8 @@ const Basket = (props) => {
                 resetCartItems={resetCartItems}
                 moneyFromClient={moneyFromClient}
                 isChange={isChange}
-                handleData={handleData}
                 handleIsPrint={handleIsPrint}
+                createInvoice={createInvoice}
               />
               {method === "Mada" ? (
                 <button
@@ -201,7 +194,6 @@ const Basket = (props) => {
                   onClick={() => {
                     handlePrint();
                     resetCartItems();
-                    handleData();
                     handleIsPrint();
                     createInvoice();
                   }}

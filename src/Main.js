@@ -46,33 +46,6 @@ function Main() {
     ]
   );
 
-  useEffect(() => {
-    console.log(isPrint);
-  });
-  // getData for component
-  useEffect(() => {
-    const items = JSON.parse(localStorage.getItem("SN"));
-    if (items) {
-      setData((data) => data, items);
-    }
-  }, [data]);
-
-  // setData
-  useEffect(() => {
-    if (data) {
-      localStorage.setItem("SN", JSON.stringify(data));
-    }
-  }, [data]);
-
-  const handleData = (ob) => {
-    const serialN = Number(data[data.length - 1].sn) + 1;
-
-    setData((data) => [
-      ...data,
-      { sn: serialN, Ammount: ob, date: new Date().toLocaleDateString() },
-    ]);
-  };
-
   const resetCartItems = () => {
     setCartItems([]);
   };
@@ -130,7 +103,6 @@ function Main() {
           onAdd={onAdd}
           onRemove={onRemove}
           resetCartItems={resetCartItems}
-          handleData={handleData}
           handleIsPrint={handleIsPrint}
         />
         {/* <Invoice cartItems={cartItems} totalPrice={totalPrice} /> */}

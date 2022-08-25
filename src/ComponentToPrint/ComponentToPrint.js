@@ -1,25 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
-import MyLogo from "./logoForPrint.png";
 import "./ComponentToPrint.css";
 
 export const ComponentToPrint = React.forwardRef((props, ref) => {
-  const { cartItems, itemsPrice, method, paidMoney, change } = props;
-
-  const [data, setData] = useState(JSON.parse(localStorage.getItem("SN")));
-
-  useEffect(() => {
-    const items = JSON.parse(localStorage.getItem("SN"));
-    if (items) {
-      setData((data) => data, items);
-    }
-  }, [data]);
-
-  useEffect(() => {
-    if (data) {
-      localStorage.setItem("SN", JSON.stringify(data));
-    }
-  }, [data]);
+  const { cartItems, itemsPrice, method, paidMoney, change, serialNumber } =
+    props;
 
   return (
     <div className="fatorah" ref={ref}>
@@ -61,9 +46,7 @@ export const ComponentToPrint = React.forwardRef((props, ref) => {
         <p>Salesperson: EXPO </p>
         <div className="date">
           <p>{new Date().toLocaleString()}</p>
-          <span style={{ fontSize: "11px" }}>
-            order# {data[data.length - 1].sn + 1}
-          </span>
+          <span style={{ fontSize: "11px" }}>order# {serialNumber}</span>
         </div>
       </div>
       <div className="p-5">

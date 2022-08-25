@@ -9,9 +9,10 @@ const InputCash = (props) => {
     handlePrint,
     resetCartItems,
     isChange,
-    handleData,
     handleIsPrint,
+    createInvoice,
   } = props;
+
   useEffect(() => {
     if (isPrintShown) {
       isCach(isPrintShown);
@@ -23,9 +24,9 @@ const InputCash = (props) => {
     let a = val;
     let b = val2;
     if (a > b || b === "") {
-      setIsPrintShown("isPrintShownF", false);
-      alert("تأكد من المبلغ المستلم");
+      setIsPrintShown(false);
       props.handleRestCount2();
+      alert("تأكد من المبلغ المستلم");
 
       return;
     }
@@ -66,8 +67,8 @@ const InputCash = (props) => {
             handleRest();
             handlePrint();
             resetCartItems();
-            handleData();
             handleIsPrint();
+            createInvoice();
           }}
           className="itemButton printFromCach"
         >

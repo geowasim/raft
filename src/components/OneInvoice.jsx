@@ -1,8 +1,8 @@
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
-import { FaRegTrashAlt } from "react-icons/fa";
 import "./OneInvoice";
+import { FaRegTrashAlt } from "react-icons/fa";
 
 const style = {
   li: `flex justify-between bg-slate-200 p-4 my-2 capitalize`,
@@ -13,10 +13,9 @@ const style = {
   button: `cursor-pointer flex items-center`,
 };
 
-const Todo = ({ todo, toggleComplete, deleteTodo }) => {
-  const { cartItems, invoiceNumber, methodArray } = todo;
+const OneInvoice = ({ todo, toggleComplete, deleteTodo }) => {
+  const { cartItems, methodArray } = todo;
   const [cartItemsArrays, setCarItemsArrays] = useState([]);
-  console.log("todoONe", todo.date.seconds);
 
   useEffect(() => {
     const arr = [];
@@ -42,21 +41,18 @@ const Todo = ({ todo, toggleComplete, deleteTodo }) => {
   }
 
   return (
-    <>
-      <table id="customers" style={{ width: "80%" }}>
-        <tr>
-          <th>{todo.invoiceNumber.sn}</th>
-          <th>{(subtotal * 15) / 100 + subtotal}</th>
-          <th>{totalItems}</th>
-          <th>{methodArray.method}</th>
-          <th>{calculateDateTime()}</th>
-        </tr>
-      </table>
-    </>
+    <div className="customers">
+      <p>{todo.invoiceNumber.sn}</p>
+      <p>{(subtotal * 15) / 100 + subtotal}</p>
+      <p>{totalItems}</p>
+      <p>{methodArray.method}</p>
+      <p>{calculateDateTime()}</p>
+      {/* <button onClick={() => deleteTodo(todo.id)}>{<FaRegTrashAlt />}</button> */}
+    </div>
   );
 };
 
-export default Todo;
+export default OneInvoice;
 
 /**
  * 

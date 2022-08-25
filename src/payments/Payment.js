@@ -16,9 +16,10 @@ export default function Payment(props) {
     resetCartItems,
     moneyFromClient,
     isChange,
-    handleData,
     handleIsPrint,
+    createInvoice,
   } = props;
+
   useEffect(() => {
     if (showMethod === "Mada") {
       checkPaymentMethod("Mada");
@@ -43,8 +44,8 @@ export default function Payment(props) {
           resetCartItems={resetCartItems}
           moneyFromClient={moneyFromClient}
           isChange={isChange}
-          handleData={handleData}
           handleIsPrint={handleIsPrint}
+          createInvoice={createInvoice}
         />
       ) : (
         <>

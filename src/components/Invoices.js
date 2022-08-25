@@ -12,6 +12,8 @@ import {
   orderBy,
 } from "firebase/firestore";
 
+import "./OneInvoice.css";
+
 const style = {
   bg: `h-screen w-screen p-4 bg-gradient-to-r from-[#2F80ED] to-[#1CB5E0]`,
   container: `bg-slate-100 max-w-[90vw] w-full m-auto rounded-md shadow-xl p-4`,
@@ -24,7 +26,6 @@ const style = {
 
 function Invoices() {
   const [todos, setTodos] = useState([]);
-  const [input, setInput] = useState("");
 
   // Read todo from firebase
   useEffect(() => {
@@ -35,8 +36,6 @@ function Invoices() {
         todosArr.push({ ...doc.data(), id: doc.id });
       });
       setTodos(todosArr);
-      console.log("todosArr", todosArr[0].invoiceNumber.sn);
-      console.log("todosArr", todosArr);
     });
     return () => unsubscribe();
   }, []);
@@ -57,27 +56,25 @@ function Invoices() {
     <div className={style.bg}>
       <div className={style.container}>
         <h3 className={style.heading}>Invoices</h3>
-        <table className="customers" style={{ width: "80%" }}>
-          <tr>
-            <th>Order#</th>
-            <th>Total</th>
-            <th>Qty</th>
-            <th>Payment Method</th>
-            <th>Date & Time</th>
-          </tr>
-        </table>
-        <ul>
-          {todos.map((todo, index) => (
-            <OneInvoice
-              key={index}
-              todo={todo}
-              toggleComplete={toggleComplete}
-              deleteTodo={deleteTodo}
-            />
-          ))}
-        </ul>
+        <div className="customers">
+          <p>Order#</p>
+          <p>Total</p>
+          <p>Qty</p>
+          <p>Payment Method</p>
+          <p>Date & Time</p>
+        </div>
+
+        {todos.map((todo, index) => (
+          <OneInvoice
+            key={index}
+            todo={todo}
+            toggleComplete={toggleComplete}
+            deleteTodo={deleteTodo}
+          />
+        ))}
+
         {todos.length < 1 ? null : (
-          <p className={style.count}>{`You have ${todos.length} todos`}</p>
+          <p className={style.count}>{`You have ${todos.length} Invoices`}</p>
         )}
       </div>
       {/* <div>{todos.forEach((x) => console.log(x))}</div> */}

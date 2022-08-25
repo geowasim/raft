@@ -11,6 +11,8 @@
 .mada {
   font-family: Readex Pro, sans-serif;
   font-weight: 200;
+  color: #333;
+  font-weight: 800;
 }
 .madaItems {
   display: flex;
@@ -33,7 +35,7 @@
 
 .tp {
   border-radius: 5px;
-  color: 4e4d4d;
+  color: #4e4d4d;
   padding: 10px;
   font-family: Readex Pro, sans-serif;
   font-weight: 200;
@@ -43,7 +45,8 @@
   font-family: Readex Pro, sans-serif;
   font-weight: 200;
   margin-top: 24px;
-  font-size: 12px;
+  font-size: 20px;
+  color: #333;
 }
 
 .cachChange {
