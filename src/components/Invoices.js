@@ -62,16 +62,20 @@ function Invoices() {
           <p>Qty</p>
           <p>Payment Method</p>
           <p>Date & Time</p>
+          <p>Print</p>
         </div>
 
-        {todos.map((todo, index) => (
-          <OneInvoice
-            key={index}
-            todo={todo}
-            toggleComplete={toggleComplete}
-            deleteTodo={deleteTodo}
-          />
-        ))}
+        {todos.map((todo, index) => {
+          return (
+            <OneInvoice
+              key={index}
+              todo={todo}
+              toggleComplete={toggleComplete}
+              deleteTodo={deleteTodo}
+              invoiceNumber={todo.invoiceNumber.sn}
+            />
+          );
+        })}
 
         {todos.length < 1 ? null : (
           <p className={style.count}>{`You have ${todos.length} Invoices`}</p>

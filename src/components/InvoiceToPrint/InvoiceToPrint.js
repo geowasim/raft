@@ -1,17 +1,26 @@
 import React from "react";
+import "./InvoiceToPrint.css";
 
-import "./ComponentToPrint.css";
+export const InvoiceToPrint = React.forwardRef((props, ref) => {
+  const { todo, cartItemsArrays, methodArray, invoiceNumber } = props;
+  // const {  itemsPrice, method, paidMoney, change, serialNumber } =
+  //   props;
 
-export const ComponentToPrint = React.forwardRef((props, ref) => {
-  const {
-    cartItems,
-    itemsPrice,
-    method,
-    paidMoney,
-    change,
-    serialNumber,
-    timeInMyPC,
-  } = props;
+  const itemsPrice = cartItemsArrays.reduce((a, c) => a + c.price * c.qty, 0);
+  const totalItems = cartItemsArrays.reduce((a, c) => a + c.qty, 0);
+
+  const taxPrice = itemsPrice * 0.15;
+  // const bagPrice = itemsPrice > 300 ? 0 : 7;
+  const totalPrice = taxPrice + itemsPrice;
+
+  function calculateDateTime() {
+    var timestamp = todo.date.seconds * 1000;
+    var date = new Date(timestamp);
+
+    return `${date.getDate()}/${
+      date.getMonth() + 1
+    }/${date.getFullYear()}-${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
+  }
 
   return (
     <div className="fatorah" ref={ref}>
@@ -52,12 +61,11 @@ export const ComponentToPrint = React.forwardRef((props, ref) => {
         <p style={{ display: "none" }}>Cachier: </p>
         <p>Salesperson: EXPO </p>
         <div className="date">
-          <p>{timeInMyPC}</p>
-          <span style={{ fontSize: "11px" }}>order# {serialNumber}</span>
+          <p>{todo.dateMyPC}</p>
+          <span style={{ fontSize: "11px" }}>order# {invoiceNumber.sn}</span>
         </div>
       </div>
       <div className="p-5">
-        {/* ref to chcek  ref={ref}*/}
         <table className="table">
           <thead>
             <tr>
@@ -70,8 +78,8 @@ export const ComponentToPrint = React.forwardRef((props, ref) => {
             </tr>
           </thead>
           <tbody>
-            {cartItems.length !== 0
-              ? cartItems.map((cartProduct, key) => (
+            {cartItemsArrays.length !== 0
+              ? cartItemsArrays.map((cartProduct, key) => (
                   <tr key={key}>
                     <td>{cartProduct.category} </td>
                     <td>
@@ -115,9 +123,9 @@ export const ComponentToPrint = React.forwardRef((props, ref) => {
             </div>
             <div className="L1">
               <p> payment by : طريقة الدفع </p>
-              <p>{method === "Mada" ? "Mada(مدى)" : "Cash(كاش)"}</p>
+              <p>{methodArray.method === "Mada" ? "Mada(مدى)" : "Cash(كاش)"}</p>
             </div>
-            {method === "Mada" ? (
+            {methodArray.method === "Mada" ? (
               <div className="L1">
                 <p> Received: المبلغ المستلم</p>
                 <p> {(itemsPrice * 15) / 100 + itemsPrice} SAR</p>
@@ -126,17 +134,17 @@ export const ComponentToPrint = React.forwardRef((props, ref) => {
               <>
                 <div className="L1">
                   <p>المبلغ المستلم Received:</p>
-                  <p> {paidMoney} SAR</p>
+                  <p> {todo.paidandchange.paidMoney} SAR</p>
                 </div>
 
                 <div className="L1">
                   <p>المتبقي للعميل Change:</p>
-                  <p>SAR {change}</p>
+                  <p>SAR {todo.paidandchange.change}</p>
                 </div>
               </>
             )}
           </div>
-        </div>
+        </div>{" "}
         <br />
       </div>
       <br />

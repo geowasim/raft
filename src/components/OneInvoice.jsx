@@ -1,7 +1,10 @@
 import React from "react";
-import { useEffect } from "react";
-import { useState } from "react";
-import "./OneInvoice";
+import { useEffect, useState, useRef } from "react";
+import { InvoiceToPrint } from "./InvoiceToPrint/InvoiceToPrint";
+import { useReactToPrint } from "react-to-print";
+import { FaRegTrashAlt } from "react-icons/fa";
+
+import "./OneInvoice.css";
 // import { FaRegTrashAlt } from "react-icons/fa";
 
 // const style = {
@@ -14,7 +17,7 @@ import "./OneInvoice";
 // };
 
 const OneInvoice = ({ todo, toggleComplete, deleteTodo }) => {
-  const { cartItems, methodArray } = todo;
+  const { cartItems, methodArray, invoiceNumber } = todo;
   const [cartItemsArrays, setCarItemsArrays] = useState([]);
 
   useEffect(() => {
@@ -40,14 +43,43 @@ const OneInvoice = ({ todo, toggleComplete, deleteTodo }) => {
     }/${date.getFullYear()}-${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
   }
 
+  function handleOnePrint() {
+    console.log(todo.invoiceNumber.sn);
+    if (todo.invoiceNumber.sn === invoiceNumber.sn) {
+    }
+  }
+  const componentRef = useRef();
+  const handleReactToPrint = useReactToPrint({
+    content: () => componentRef.current,
+  });
+
+  const handlePrint = () => {
+    handleReactToPrint();
+  };
+
   return (
-    <div className="customers">
+    <div
+      className="customers"
+      onClick={function () {
+        handleOnePrint();
+        handlePrint();
+      }}
+    >
       <p>{todo.invoiceNumber.sn}</p>
       <p>{(subtotal * 15) / 100 + subtotal}</p>
       <p>{totalItems}</p>
       <p>{methodArray.method}</p>
-      <p>{calculateDateTime()}</p>
+      <p>{todo.dateMyPC}</p>
       {/* <button onClick={() => deleteTodo(todo.id)}>{<FaRegTrashAlt />}</button> */}
+      <div style={{ display: "none" }}>
+        <InvoiceToPrint
+          todo={todo}
+          ref={componentRef}
+          cartItemsArrays={cartItemsArrays}
+          methodArray={methodArray}
+          invoiceNumber={invoiceNumber}
+        />
+      </div>
     </div>
   );
 };

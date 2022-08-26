@@ -74,6 +74,7 @@ const Basket = (props) => {
     return () => unsubscribe();
   }, []);
 
+  const timeInMyPC = String(new Date().toLocaleString());
   // Create invoice
   const createInvoice = async () => {
     await addDoc(collection(db, "todos"), {
@@ -84,11 +85,15 @@ const Basket = (props) => {
       invoiceNumber: {
         sn: serialNumber,
       },
+      paidandchange: {
+        paidMoney: paidMoney,
+        change: change,
+      },
 
       date: serverTimestamp(),
+      dateMyPC: timeInMyPC,
     });
   };
-
   return (
     <div className="basketContainer">
       <div className="basket">
@@ -127,6 +132,7 @@ const Basket = (props) => {
               }}
             >
               {/* ---------- */}
+
               <ComponentToPrint
                 cartItems={cartItems}
                 itemsPrice={itemsPrice}
@@ -135,6 +141,7 @@ const Basket = (props) => {
                 paidMoney={paidMoney}
                 change={change}
                 serialNumber={serialNumber}
+                timeInMyPC={timeInMyPC}
               />
               {/* ------------ */}
             </div>
