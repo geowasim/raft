@@ -72,7 +72,7 @@ const Basket = (props) => {
       setSerialNumber(todosArr[0].invoiceNumber.sn + 1);
     });
     return () => unsubscribe();
-  }, []);
+  }, [serialNumber]);
 
   const timeInMyPC = String(new Date().toLocaleString());
   // Create invoice

@@ -43,11 +43,11 @@ const OneInvoice = ({ todo, toggleComplete, deleteTodo }) => {
     }/${date.getFullYear()}-${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
   }
 
-  function handleOnePrint() {
-    console.log(todo.invoiceNumber.sn);
-    if (todo.invoiceNumber.sn === invoiceNumber.sn) {
-    }
-  }
+  // function handleOnePrint() {
+  //   console.log(todo.invoiceNumber.sn);
+  //   if (todo.invoiceNumber.sn === invoiceNumber.sn) {
+  //   }
+  // }
   const componentRef = useRef();
   const handleReactToPrint = useReactToPrint({
     content: () => componentRef.current,
@@ -67,7 +67,6 @@ const OneInvoice = ({ todo, toggleComplete, deleteTodo }) => {
 
       <p
         onClick={function () {
-          handleOnePrint();
           handlePrint();
         }}
         style={{ cursor: "pointer", display: "flex", justifyContent: "center" }}
