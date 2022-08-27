@@ -1,0 +1,13 @@
+.logout {
+  position: absolute;
+  top: -15px;
+  right: 0;
+  background: #fdc071;
+  color: #333;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  height: 30px;
+}
