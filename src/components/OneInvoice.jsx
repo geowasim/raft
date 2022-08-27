@@ -2,7 +2,7 @@ import React from "react";
 import { useEffect, useState, useRef } from "react";
 import { InvoiceToPrint } from "./InvoiceToPrint/InvoiceToPrint";
 import { useReactToPrint } from "react-to-print";
-import { FaRegTrashAlt } from "react-icons/fa";
+import { FaRegTrashAlt, FaPrint } from "react-icons/fa";
 
 import "./OneInvoice.css";
 // import { FaRegTrashAlt } from "react-icons/fa";
@@ -58,18 +58,23 @@ const OneInvoice = ({ todo, toggleComplete, deleteTodo }) => {
   };
 
   return (
-    <div
-      className="customers"
-      onClick={function () {
-        handleOnePrint();
-        handlePrint();
-      }}
-    >
+    <div className="myOneInvoice">
       <p>{todo.invoiceNumber.sn}</p>
       <p>{(subtotal * 15) / 100 + subtotal}</p>
       <p>{totalItems}</p>
       <p>{methodArray.method}</p>
       <p>{todo.dateMyPC}</p>
+
+      <p
+        onClick={function () {
+          handleOnePrint();
+          handlePrint();
+        }}
+        style={{ cursor: "pointer", display: "flex", justifyContent: "center" }}
+      >
+        <FaPrint />
+      </p>
+
       {/* <button onClick={() => deleteTodo(todo.id)}>{<FaRegTrashAlt />}</button> */}
       <div style={{ display: "none" }}>
         <InvoiceToPrint

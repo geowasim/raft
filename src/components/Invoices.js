@@ -56,7 +56,7 @@ function Invoices() {
     <div className={style.bg}>
       <div className={style.container}>
         <h3 className={style.heading}>Invoices</h3>
-        <div className="customers">
+        <div className="myOneInvoice customers">
           <p>Order#</p>
           <p>Total</p>
           <p>Qty</p>

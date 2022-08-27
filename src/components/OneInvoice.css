@@ -14,8 +14,17 @@
 
 .myOneInvoice {
   display: flex;
+  flex-direction: row;
+  text-align: center;
+  width: 100%;
+}
+
+.myOneInvoice:hover {
+  background-color: #ddd;
 }
 
 .myOneInvoice p {
-  flex: 1;
+  width: 16.6%;
+  border-right: 1px solid #3d3d3d;
+  border-bottom: 1px dotted #adadad;
 }
