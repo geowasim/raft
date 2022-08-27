@@ -1,11 +1,13 @@
 @import url("https://fonts.googleapis.com/css2?family=Readex+Pro&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Markazi+Text&display=swap");
-
+@import url("https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Aboreto&family=El+Messiri&family=Kufam&display=swap");
 .App {
   text-align: center;
-  font-family: "Readex Pro", sans-serif;
+  font-family: "" El Messiri "", sans-serif;
 
   background-color: #f9faf5;
+  background-image: linear-gradient(#f5f2ef, #ae9da54f);
   display: flex;
 }
 
@@ -63,5 +65,12 @@
   align-content: center;
   align-items: center;
   font-size: 25px;
-  font-family: "Readex Pro", sans-serif;
+  font-family: "El Messiri", serif;
+  color: #4e4d4d;
+}
+
+nav {
+  background-image: linear-gradient(45deg, #fdc071, transparent);
+  height: 23px;
+  margin-top: -5px;
 }

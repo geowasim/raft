@@ -17,7 +17,7 @@
   align-items: center;
 }
 .under_line {
-  content: "asdasdasd";
+  content: "";
   width: 50%;
   height: 1px;
   background-color: #000;

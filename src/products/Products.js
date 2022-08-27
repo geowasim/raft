@@ -12,20 +12,12 @@ const Products = (props) => {
   return (
     <>
       <div className="products">
-        <h3 style={{ textAlign: "center" }}>Products</h3>
+        {/* <h3 style={{ textAlign: "center" }}>Products</h3> */}
         <div className="products">
           {perfumes.map((perfume) => (
             <div
               key={perfume.id}
-              className={`${
-                perfume.category === "Perfume"
-                  ? "perfume"
-                  : perfume.category === "Odor"
-                  ? "odor"
-                  : perfume.category === "Hair Mist"
-                  ? "hairMist"
-                  : "b1"
-              } card`}
+              className={`card`}
               onClick={() => {
                 setIdPerfume(perfume.id);
                 handleIsPrint(true);
@@ -45,3 +37,15 @@ const Products = (props) => {
 };
 
 export default Products;
+
+/**
+ * ${
+                perfume.category === "Perfume"
+                  ? "perfume"
+                  : perfume.category === "Odor"
+                  ? "odor"
+                  : perfume.category === "Hair Mist"
+                  ? "hairMist"
+                  : "b1"
+ * }
+ */

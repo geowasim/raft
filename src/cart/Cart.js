@@ -98,7 +98,7 @@ const Basket = (props) => {
     <div className="basketContainer">
       <div className="basket">
         <h2 className="basketName">السلة</h2>
-        <div>
+        <div className="basketName">
           {cartItems.length === 0 && (
             <div>
               <p>السلة فارغة</p>

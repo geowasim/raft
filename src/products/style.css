@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Aboreto&display=swap");
 img {
   width: 100px;
 }
@@ -8,8 +9,8 @@ img {
   justify-content: flex-start;
   align-items: center;
   flex-wrap: wrap;
-  border-right: 2px solid #cccbcb;
-  border-top: 2px solid #cccbcb;
+  /* border-right: 2px solid #cccbcb;
+  border-top: 2px solid #cccbcb; */
   overflow: hidden;
 }
 
@@ -21,16 +22,19 @@ img {
   align-items: center;
   padding: 3px 12px;
   cursor: pointer;
+  font-family: Aboreto, sans-serif;
 }
 .card:hover,
 .card:focus {
-  background-color: #1899d6;
+  background-color: #ffbe59;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 img {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   border-radius: 5px;
-  width: 75px;
+  width: 60px;
+  height: 70px;
 }
 
 .productDes p {

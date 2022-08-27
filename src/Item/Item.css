@@ -1,5 +1,5 @@
 .itemContainer {
-  border-right: 2px solid whitesmoke;
+  /* border-right: 2px solid whitesmoke; */
   width: 33vw;
   display: flex;
   justify-content: center;
@@ -24,8 +24,8 @@
 } */
 .itemImage {
   width: 250px;
-  height: 300px;
-  object-fit: contain;
+  height: 400px;
+  object-fit: cover;
   border-radius: 5px;
 }
 
@@ -41,20 +41,20 @@
 .itemDes {
   margin-top: 25px;
   font-size: 18px;
-  font-family: Readex Pro, sans-serif;
+  font-family: "El Messiri", sans-serif;
 }
 
 .itemButton {
   appearance: button;
-  background-color: #1899d6;
+  background-color: #ffbe59;
   border: solid transparent;
   border-radius: 16px;
   border-width: 0 0 4px;
   box-sizing: border-box;
-  color: #ffffff;
+  color: #302f2d;
   cursor: pointer;
   display: inline-block;
-  font-family: din-round, sans-serif;
+  font-family: "El Messiri", sans-serif;
   font-size: 15px;
   font-weight: 700;
   letter-spacing: 0.8px;
@@ -74,11 +74,12 @@
   white-space: nowrap;
   width: 90%;
   margin: 12px 0;
+  font-family: "" El Messiri "", sans-serif;
 }
 
 .itemButton:after {
   background-clip: padding-box;
-  background-color: #1cb0f6;
+  background-color: #fdcc8b;
   border: solid transparent;
   border-radius: 16px;
   border-width: 0 0 4px;

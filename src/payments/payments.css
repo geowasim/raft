@@ -9,7 +9,7 @@
   margin-top: 10px;
 }
 .mada {
-  font-family: Readex Pro, sans-serif;
+  font-family: "El Messiri", sans-serif;
   font-weight: 200;
   color: #333;
   font-weight: 800;
@@ -24,9 +24,9 @@
 .change {
   display: flex;
   position: absolute;
-  bottom: 86px;
+  bottom: 102px;
   right: 1.5vw;
-  background-color: #1899d6;
+  background-color: #ffbe59;
   height: 15px;
   justify-content: center;
   align-items: center;
@@ -37,12 +37,12 @@
   border-radius: 5px;
   color: #4e4d4d;
   padding: 10px;
-  font-family: Readex Pro, sans-serif;
+  font-family: "El Messiri", sans-serif;
   font-weight: 200;
 }
 
 .cacheContainer {
-  font-family: Readex Pro, sans-serif;
+  font-family: "El Messiri", sans-serif;
   font-weight: 200;
   margin-top: 24px;
   font-size: 20px;
