@@ -47,7 +47,7 @@ const InputCash = (props) => {
         className="itemButton"
         style={{
           border: "1px solid gray",
-          width: "108px",
+          width: "auto",
           padding: "0 2px",
           height: "44px",
           fontSize: "18px",
