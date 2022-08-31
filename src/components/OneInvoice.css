@@ -33,3 +33,10 @@
   background-color: #4f4f4f;
   height: auto;
 }
+
+.totalInfo {
+  display: flex;
+}
+.totalInfo p {
+  flex: 1;
+}
