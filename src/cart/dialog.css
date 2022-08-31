@@ -1,0 +1,31 @@
+.no {
+  background: #972b4f;
+  color: #fdc071;
+  padding: 10px;
+  margin-right: 4px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 18px;
+}
+
+.no:hover {
+  background-color: #b5496d;
+}
+
+.yes {
+  background: #ffbe59;
+  color: #972b4f;
+  padding: 10px;
+  margin-left: 4px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 18px;
+  font-weight: 800;
+  font-family: "El Messiri", "sans-serif";
+}
+
+.yes:hover {
+  background-color: #fdca86;
+}

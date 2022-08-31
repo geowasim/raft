@@ -17,7 +17,6 @@ const Signin = () => {
       navigate("/pos");
     } catch (e) {
       setError(e.message);
-      console.log(e.message);
     }
   };
 
@@ -53,6 +52,7 @@ const Signin = () => {
           Sign In
         </button>
       </form>
+      {error && <p style={{ color: "red" }}>Wrong username or password</p>}
     </div>
   );
 };

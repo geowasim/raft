@@ -1,6 +1,7 @@
 import React from "react";
 import { faCreditCard } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import "./payments.css";
 
 export default function Mada(props) {
   const count = props.itemsPrice;
@@ -20,8 +21,9 @@ export default function Mada(props) {
         </h2>
       </div>
 
-      <h2 className="tp">
-        المبلغ المطلوب : <span> {count * 0.15 + count} ريال </span>
+      <h2 className="tp wanted">
+        المبلغ المطلوب :{" "}
+        <span style={{ fontSize: "22px" }}> {count * 0.15 + count} ريال </span>
       </h2>
     </div>
   );

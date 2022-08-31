@@ -52,10 +52,13 @@ function Invoices() {
     await deleteDoc(doc(db, "todos", id));
   };
 
+  const total = todos.reduce((a, c) => a + c.totalPrice, 0);
+
   return (
     <div className={`${style.bg} invoices`}>
       <div className={style.container}>
         <h3 className={style.heading}>Invoices</h3>
+        <p>Total Income : {total.toFixed(2)}</p>
         <div className="myOneInvoice customers">
           <p>Order#</p>
           <p>Total</p>

@@ -54,7 +54,7 @@ export default function Payment(props) {
       )}
       <button onClick={handleCashe} className="itemButton change">
         {showCashe ? (
-          <>" Mada الرجوع إلى مدى"</>
+          <>Mada / الرجوع إلى الدفع بالبطاقة</>
         ) : (
           <>cash/ لتغير إلى الدفع كاش</>
         )}

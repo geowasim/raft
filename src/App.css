@@ -4,7 +4,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Aboreto&family=El+Messiri&family=Kufam&display=swap");
 .App {
   text-align: center;
-  font-family: "" El Messiri "", sans-serif;
+  font-family: "El Messiri", sans-serif;
 
   background-color: #f9faf5;
   background-image: linear-gradient(#f5f2ef, #ae9da54f);
@@ -23,7 +23,7 @@
 }
 
 .App-header {
-  min-height: 100vh;
+  min-height: calc(100vh - 24px);
   display: flex;
   align-items: center;
   font-size: calc(10px + 2vmin);

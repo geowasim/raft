@@ -5,16 +5,6 @@ import { useReactToPrint } from "react-to-print";
 import { FaRegTrashAlt, FaPrint } from "react-icons/fa";
 
 import "./OneInvoice.css";
-// import { FaRegTrashAlt } from "react-icons/fa";
-
-// const style = {
-//   li: `flex justify-between bg-slate-200 p-4 my-2 capitalize`,
-//   liComplete: `flex justify-between bg-slate-400 p-4 my-2 capitalize`,
-//   row: `flex`,
-//   text: `ml-2 cursor-pointer`,
-//   textComplete: `ml-2 cursor-pointer line-through`,
-//   button: `cursor-pointer flex items-center`,
-// };
 
 const OneInvoice = ({ todo, toggleComplete, deleteTodo }) => {
   const { cartItems, methodArray, invoiceNumber } = todo;
@@ -34,20 +24,6 @@ const OneInvoice = ({ todo, toggleComplete, deleteTodo }) => {
   const subtotal = cartItemsArrays.reduce((a, c) => a + c.price * c.qty, 0);
   const totalItems = cartItemsArrays.reduce((a, c) => a + c.qty, 0);
 
-  function calculateDateTime() {
-    var timestamp = todo.date.seconds * 1000;
-    var date = new Date(timestamp);
-
-    return `${date.getDate()}/${
-      date.getMonth() + 1
-    }/${date.getFullYear()}-${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
-  }
-
-  // function handleOnePrint() {
-  //   console.log(todo.invoiceNumber.sn);
-  //   if (todo.invoiceNumber.sn === invoiceNumber.sn) {
-  //   }
-  // }
   const componentRef = useRef();
   const handleReactToPrint = useReactToPrint({
     content: () => componentRef.current,
@@ -92,6 +68,19 @@ export default OneInvoice;
 
 /**
  * 
+ *  function calculateDateTime() {
+    var timestamp = todo.date.seconds * 1000;
+    var date = new Date(timestamp);
+
+    return `${date.getDate()}/${
+      date.getMonth() + 1
+    }/${date.getFullYear()}-${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
+  }
+ *   // function handleOnePrint() {
+  //   console.log(todo.invoiceNumber.sn);
+  //   if (todo.invoiceNumber.sn === invoiceNumber.sn) {
+  //   }
+  // }
  *       <li className={todo.completed ? style.liComplete : style.li}>
         <div className={style.row}>
           <input

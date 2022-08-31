@@ -17,6 +17,7 @@ import {
   // doc,
   // deleteDoc,
 } from "firebase/firestore";
+import Dialog from "./Dialog";
 
 const Basket = (props) => {
   const { cartItems, resetCartItems, onAdd, onRemove, handleIsPrint } = props;
@@ -24,6 +25,7 @@ const Basket = (props) => {
   const [isCachDone, setIsCachDone] = useState(false);
   const [paidMoney, setPaidMoney] = useState(null);
   const [change, setChange] = useState(null);
+  const [hideQuestionShowPay, setHideQuestionShowPay] = useState(false);
 
   const itemsPrice = cartItems.reduce((a, c) => a + c.price * c.qty, 0);
   const totalItems = cartItems.reduce((a, c) => a + c.qty, 0);
@@ -92,12 +94,25 @@ const Basket = (props) => {
 
       date: serverTimestamp(),
       dateMyPC: timeInMyPC,
+      totalPrice: totalPrice,
+      totalItems: totalItems,
     });
   };
   return (
     <div className="basketContainer">
       <div className="basket">
         <h2 className="basketName">السلة</h2>
+        {/* {cartItems.length !== 0 && (
+          <button
+            className="cancelOrder"
+            onClick={() => {
+              resetCartItems();
+              handleIsPrint();
+            }}
+          >
+            إلغاء الطلب
+          </button>
+        )} */}
         <div className="basketName">
           {cartItems.length === 0 && (
             <div>
@@ -105,25 +120,26 @@ const Basket = (props) => {
             </div>
           )}
         </div>
-        {cartItems.map((item) => (
-          <div key={item.id} className="row">
-            <div className="basketTitle">{item.description}</div>
-            <div className="basketIND">
-              <button onClick={() => onAdd(item)} className="itemButton add">
-                +
-              </button>
-              <button
-                onClick={() => onRemove(item)}
-                className="itemButton remove"
-              >
-                -
-              </button>
+        {cartItems.length !== 0 &&
+          cartItems.map((item) => (
+            <div key={item.id} className="row">
+              <div className="basketTitle">{item.description}</div>
+              <div className="basketIND">
+                <button onClick={() => onAdd(item)} className="itemButton add">
+                  +
+                </button>
+                <button
+                  onClick={() => onRemove(item)}
+                  className="itemButton remove"
+                >
+                  -
+                </button>
+              </div>
+              <div className="basketQT">
+                {item.qty} X {Number(item.price) * 0.15 + Number(item.price)}
+              </div>
             </div>
-            <div className="basketQT">
-              {item.qty} X {Number(item.price) * 0.15 + Number(item.price)}
-            </div>
-          </div>
-        ))}
+          ))}
         {cartItems.length !== 0 && (
           <>
             <div
@@ -194,19 +210,27 @@ const Basket = (props) => {
                 handleIsPrint={handleIsPrint}
                 createInvoice={createInvoice}
               />
-              {method === "Mada" ? (
-                <button
-                  className="itemButton pay"
-                  onClick={() => {
-                    handlePrint();
-                    resetCartItems();
-                    handleIsPrint();
-                    createInvoice();
-                  }}
-                >
-                  الدفع - طباعة
-                </button>
-              ) : null}
+              {method === "Mada" && (
+                <div className="madaOptions">
+                  <button
+                    onClick={() => setHideQuestionShowPay(true)}
+                    className="itemButton"
+                  >
+                    {" "}
+                    طباعة الفاتورة
+                  </button>
+                </div>
+              )}
+              {hideQuestionShowPay && (
+                <Dialog
+                  setHideQuestionShowPay={setHideQuestionShowPay}
+                  totalPrice={totalPrice}
+                  resetCartItems={resetCartItems}
+                  handlePrint={handlePrint}
+                  handleIsPrint={handleIsPrint}
+                  createInvoice={createInvoice}
+                />
+              )}
             </div>
           </div>
         )}
