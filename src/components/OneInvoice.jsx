@@ -7,7 +7,8 @@ import { FaRegTrashAlt, FaPrint } from "react-icons/fa";
 import "./OneInvoice.css";
 
 const OneInvoice = ({ todo, toggleComplete, deleteTodo }) => {
-  const { cartItems, methodArray, invoiceNumber } = todo;
+  const { cartItems, methodArray, invoiceNumber, totalItems, totalPrice } =
+    todo;
   const [cartItemsArrays, setCarItemsArrays] = useState([]);
 
   useEffect(() => {
@@ -22,7 +23,7 @@ const OneInvoice = ({ todo, toggleComplete, deleteTodo }) => {
   }, [cartItems]);
 
   const subtotal = cartItemsArrays.reduce((a, c) => a + c.price * c.qty, 0);
-  const totalItems = cartItemsArrays.reduce((a, c) => a + c.qty, 0);
+  const totalItemsInBasket = cartItemsArrays.reduce((a, c) => a + c.qty, 0);
 
   const componentRef = useRef();
   const handleReactToPrint = useReactToPrint({
@@ -37,7 +38,7 @@ const OneInvoice = ({ todo, toggleComplete, deleteTodo }) => {
     <div className="myOneInvoice">
       <p>{todo.invoiceNumber.sn}</p>
       <p>{(subtotal * 15) / 100 + subtotal}</p>
-      <p>{totalItems}</p>
+      <p>{totalItemsInBasket}</p>
       <p>{methodArray.method}</p>
       <p>{todo.dateMyPC}</p>
 
