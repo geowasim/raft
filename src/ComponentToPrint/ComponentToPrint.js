@@ -181,7 +181,7 @@ export const ComponentToPrint = React.forwardRef((props, ref) => {
             </div>
             <div className="L1">
               <p> payment by : طريقة الدفع </p>
-              <p>{method === "Mada" ? "Mada(مدى)" : "Cash(كاش)"}</p>
+              <p>{method === "Mada" ? "Card(بطاقة)" : "Cash(كاش)"}</p>
             </div>
             {method === "Mada" ? (
               <div className="L1">
@@ -217,6 +217,7 @@ export const ComponentToPrint = React.forwardRef((props, ref) => {
       >
         <QRCode value={qrCodeB64} />
       </div> */}
+      <br />
       <div
         className="qr-container"
         style={{
