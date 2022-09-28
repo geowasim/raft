@@ -201,7 +201,7 @@ const Basket = (props) => {
             </div>
             <hr />
 
-            <div className="row " style={{ margin: "5px 0" }}>
+            <div className="row " style={{ margin: "10px 0" }}>
               <div
                 style={{
                   display: "flex",
@@ -209,7 +209,7 @@ const Basket = (props) => {
                   margin: "15px 15px",
                 }}
               >
-                <span>السعر الاجمالي</span> شامل الضريبة
+                <span>السعر الاجمالي</span>
               </div>
               <div
                 style={{
@@ -218,7 +218,7 @@ const Basket = (props) => {
                   marginLeft: "15px",
                 }}
               >
-                <span> ريال سعودي</span> {totalPrice} SAR{" "}
+                <span> ر.س</span> {totalPrice}
               </div>
               <div
                 style={{

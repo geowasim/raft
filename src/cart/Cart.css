@@ -7,8 +7,8 @@
   height: 100vh;
   position: fixed;
   top: 0;
-  right: 5vw;
-  width: 33vw;
+  right: 2vw;
+  width: 40vw;
 }
 .basket {
   color: #fff;
@@ -110,6 +110,8 @@ hr {
   text-align: center;
   justify-content: center;
   align-items: center;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 .totalPrice {
