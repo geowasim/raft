@@ -17,7 +17,7 @@ export default function Mada(props) {
               style={{ fontSize: "30px", marginRight: "10px" }}
             />
           </span>{" "}
-          مدى{" "}
+          بطاقة{" "}
         </h2>
       </div>
 
