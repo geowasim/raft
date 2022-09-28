@@ -8,8 +8,10 @@ import {
   updateDoc,
   doc,
   // addDoc,
+  limit,
   deleteDoc,
   orderBy,
+  where,
 } from "firebase/firestore";
 
 import "./OneInvoice.css";
@@ -24,12 +26,18 @@ const style = {
   count: `text-center p-2`,
 };
 
-function Invoices() {
+function Invoices(props) {
   const [todos, setTodos] = useState([]);
+  const { readDataFromInvoiceComponent } = props;
 
   // Read todo from firebase
   useEffect(() => {
-    const q = query(collection(db, "todos"), orderBy("invoiceNumber", "desc"));
+    const q = query(
+      collection(db, "hasa22"),
+      orderBy("invoiceNumber", "desc"),
+      where("invoiceNumber", ">", { sn: 1000295 })
+    );
+
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       let todosArr = [];
       querySnapshot.forEach((doc) => {
@@ -42,14 +50,23 @@ function Invoices() {
 
   // Update todo in firebase
   const toggleComplete = async (todo) => {
-    await updateDoc(doc(db, "todos", todo.id), {
+    await updateDoc(doc(db, "hasa22", todo.id), {
       completed: !todo.completed,
     });
   };
 
   // Delete todo
   const deleteTodo = async (id) => {
-    await deleteDoc(doc(db, "todos", id));
+    await deleteDoc(doc(db, "hasa22", id));
+  };
+
+  const handleEdit = async (id, todo) => {
+    // console.log("edit id", id);
+    // console.log("todo edit", todo);
+    await updateDoc(doc(db, "hasa22", todo.id), {
+      // do things
+      // completed: !todo.completed,
+    });
   };
 
   const total = todos.reduce((a, c) => a + c.totalPrice, 0);
@@ -79,6 +96,8 @@ function Invoices() {
               toggleComplete={toggleComplete}
               deleteTodo={deleteTodo}
               invoiceNumber={todo.invoiceNumber.sn}
+              handleEdit={handleEdit}
+              readDataFromInvoiceComponent={readDataFromInvoiceComponent}
             />
           );
         })}
@@ -88,54 +107,9 @@ function Invoices() {
         )}
       </div>
       {/* <div>{todos.forEach((x) => console.log(x))}</div> */}
+      {/* <TestNewCollection /> */}
     </div>
   );
 }
 
 export default Invoices;
-
-/**
- * // Create todo
-  const createTodo = async (e) => {
-    e.preventDefault(e);
-    if (input === "") {
-      alert("Please enter a valid todo");
-      return;
-    }
-    await addDoc(collection(db, "todos"), {
-      methodArray: {
-        method: "Mada",
-      },
-      cartItems: {
-        item1: {
-          id: 1,
-          title: "fiore",
-          descreption: "perfum",
-          category: "odor",
-          price: 199,
-          vol: 150,
-          qty: 1,
-        },
-        item2: {
-          id: 2,
-          title: "viola",
-          descreption: "spray",
-          category: "Hair Mist",
-          price: 50,
-          vol: 30,
-          qty: 1,
-        },
-      },
-      invoiceNumber: {
-        sn: 1000002,
-      },
-      sum: {
-        qty: 2,
-        subtotal: 398,
-        total: 457.7,
-      },
-    });
-    setInput("");
-  };
- * 
- */

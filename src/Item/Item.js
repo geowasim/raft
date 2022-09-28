@@ -3,7 +3,7 @@ import PerfumeContext from "../context/ProductContext";
 import "./Item.css";
 
 const Item = (props) => {
-  const { onAdd } = props;
+  const { onAdd, setShowCalc } = props;
   const perfumes = useContext(PerfumeContext);
   const [showItem, setShowItem] = useState(null);
 
@@ -27,7 +27,14 @@ const Item = (props) => {
             <div>
               <p className="itemDes">{showItem.description}</p>
             </div>
-            <button className="itemButton" onClick={() => onAdd(showItem)}>
+            <button
+              className="itemButton"
+              onClick={() => {
+                onAdd(showItem);
+                setShowCalc(false);
+                // console.log("item has been added");
+              }}
+            >
               إضافة للسلة
             </button>
           </div>

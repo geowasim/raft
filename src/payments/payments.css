@@ -85,3 +85,14 @@
   font-size: 30px;
   bottom: 142px;
 }
+
+.methods-container {
+  display: flex;
+}
+
+.payment-methods {
+  margin-right: 5px;
+  height: 10px;
+  display: flex;
+  align-items: center;
+}

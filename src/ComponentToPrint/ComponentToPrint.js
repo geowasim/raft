@@ -1,6 +1,12 @@
 import React from "react";
+import { Buffer } from "buffer";
+
+import OfferComponent from "../OffersComponent/OfferComponent";
+// import QRCode from "qrcode.react";
+import QRCode from "react-qr-code";
 
 import "./ComponentToPrint.css";
+import { getTLVForValue } from "./BarcodeFunction";
 
 export const ComponentToPrint = React.forwardRef((props, ref) => {
   const {
@@ -11,25 +17,61 @@ export const ComponentToPrint = React.forwardRef((props, ref) => {
     change,
     serialNumber,
     timeInMyPC,
+    // totalPrice,
+    isOffer,
+    itemPriceBefore,
+    offerOrNot,
   } = props;
 
+  let timeBuf = `${timeInMyPC}`;
+  let totalWithVat = String(((itemsPrice * 15) / 100 + itemsPrice).toFixed(2));
+  let totalVat = String((itemsPrice * 0.15).toFixed(2));
+
+  //----------------
+
+  //1.Seller Name
+  let sellerNameBuf = getTLVForValue("1", "Alnathra Al-Raqiqa");
+  //2.Vat Registration
+  let vatRegistrationNameBuf = getTLVForValue("2", "310430668500003");
+  //Seller Name
+  let timeStampBuf = getTLVForValue("3", timeBuf);
+  //Seller Name
+  let taxTotalNameBuf = getTLVForValue("4", totalWithVat);
+  //Seller Name
+  let vatTotalBuf = getTLVForValue("5", totalVat);
+
+  let tagsBufsArray = [
+    sellerNameBuf,
+    vatRegistrationNameBuf,
+    timeStampBuf,
+    taxTotalNameBuf,
+    vatTotalBuf,
+  ];
+
+  let qrCodeBuf = Buffer.concat(tagsBufsArray);
+  let qrCodeB64 = qrCodeBuf.toString("base64");
+
+  //-------------
+
+  // console.log("itemsPrice", itemsPrice);
+  // console.log("itemsPriceBefore", itemPriceBefore);
   return (
     <div className="fatorah" ref={ref}>
       <div className="com_title">
-        <h2>Qandella</h2>
-        <h2> كانديـــلا </h2>
+        {/* <h2>Qandella</h2> */}
+        <h2>مؤسسة النظرة الرقيقه للتجارة </h2>
         <br />
         <div className="under_line"></div>
         <br />
       </div>
       <div className="perData">
-        <p>معرض صناع العطور الثاني - الطائف</p>
+        <p>معرض الاحساء للعطور والبخور</p>
         <p>Simplified Vat Invoice</p>
         <p>فاتورة ضريبية مبسطة</p>
 
         <p>Vat: 310430668500003 :الرقم الضريبي</p>
 
-        <p>C.R: 1010208753 :س .ت</p>
+        <p>C.R: 1010725434 :س .ت</p>
       </div>
       <div className="clientDataContainer">
         <div className="L1">
@@ -89,6 +131,30 @@ export const ComponentToPrint = React.forwardRef((props, ref) => {
         </table>
         <div className="paymentDataContainer">
           <div className="paymentData ">
+            {isOffer && (
+              <div className="L1" style={{ fontSize: "12px" }}>
+                <p
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <span> المبلغ السابق بدون الضريبة</span>{" "}
+                  <span>Subtotal no discount:</span>{" "}
+                </p>
+                <h4>{itemPriceBefore} SAR</h4>
+              </div>
+            )}
+            {isOffer && (
+              <div className="L1">
+                <p>Discount *</p>
+                <p>
+                  <b>{Math.ceil(itemsPrice) - itemPriceBefore} SAR</b>
+                </p>
+              </div>
+            )}
             <div className="L1">
               <p>Total without VAT </p>
               <p>{Math.ceil(itemsPrice)} SAR</p>
@@ -139,8 +205,39 @@ export const ComponentToPrint = React.forwardRef((props, ref) => {
         </div>
         <br />
       </div>
+      <hr />
+      <br />
+      {offerOrNot && <OfferComponent codeE={"HAS432"} />}
+      {/* <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          marginTop: "15px",
+        }}
+      >
+        <QRCode value={qrCodeB64} />
+      </div> */}
+      <div
+        className="qr-container"
+        style={{
+          height: "auto",
+          margin: "0 auto",
+          maxWidth: 180,
+          width: "100%",
+          marginTop: "15px",
+        }}
+      >
+        <QRCode
+          className="qr-code"
+          size={256}
+          style={{ height: "auto", maxWidth: "100%", width: "100%" }}
+          value={qrCodeB64}
+          viewBox={`0 0 256 256`}
+        />
+      </div>
       <br />
       <hr />
+
       <div className="welcome">
         <p style={{ marginTop: "10px" }}> نشكركم لاختياركم منتجاتنا </p>
         <p> Thank you for choosing our products</p>

@@ -1,0 +1,26 @@
+.inf {
+  display: flex;
+  justify-content: space-around;
+  background-color: #142f5235;
+  margin: 5px;
+}
+
+.inf p:nth-of-type(5) {
+  background-color: #fff;
+  width: 80px;
+  height: 25px;
+}
+
+.btn {
+  margin: 10px 0;
+  width: 25px;
+  border-radius: 5px;
+  border: 1px solid lightgray;
+  cursor: pointer;
+  background-color: rgb(250, 65, 65);
+  color: #fff;
+}
+
+.btn:hover {
+  border: 1px solid gray;
+}

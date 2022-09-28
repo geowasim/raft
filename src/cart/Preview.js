@@ -1,73 +1,61 @@
 import React from "react";
-import OfferComponent from "../../OffersComponent/OfferComponent";
-import "./InvoiceToPrint.css";
+import OfferComponent from "../OffersComponent/OfferComponent";
 
-export const InvoiceToPrint = React.forwardRef((props, ref) => {
-  const { todo, cartItemsArrays, methodArray, invoiceNumber } = props;
-  // const {  itemsPrice, method, paidMoney, change, serialNumber } =
-  //   props;
-
-  const itemsPrice = cartItemsArrays.reduce((a, c) => a + c.price * c.qty, 0);
-  // const itemsPrice = cartItemsArrays.reduce((a, c) => a + c.price * c.qty, 0);
-  // const totalItems = cartItemsArrays.reduce((a, c) => a + c.qty, 0);
-
-  // const taxPrice = itemsPrice * 0.15;
-  // const bagPrice = itemsPrice > 300 ? 0 : 7;
-  // const totalPrice = taxPrice + itemsPrice;
-
-  // function calculateDateTime() {
-  //   var timestamp = todo.date.seconds * 1000;
-  //   var date = new Date(timestamp);
-
-  //   return `${date.getDate()}/${
-  //     date.getMonth() + 1
-  //   }/${date.getFullYear()}-${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
-  // }
+const Preview = React.forwardRef((props, ref) => {
+  const {
+    cartItems,
+    itemsPrice,
+    method,
+    paidMoney,
+    change,
+    serialNumber,
+    timeInMyPC,
+    isOffer,
+    codeE,
+    itemPriceBefore,
+  } = props;
 
   return (
-    <div className="fatorah" ref={ref}>
-      <div className="com_title">
-        <h2>Qandella</h2>
-        <h2> كانديـــلا </h2>
-        <br />
-        <div className="under_line"></div>
-        <br />
-      </div>
-      <div className="perData">
+    <div
+      className="fatorah-p"
+      ref={ref}
+      style={{ height: "82vh", width: "100%", scale: "0.95" }}
+    >
+      <div className="perData-p">
         <p>معرض صناع العطور - الاحساء</p>
         <p>Simplified Vat Invoice</p>
         <p>فاتورة ضريبية مبسطة</p>
 
         <p>Vat: 310430668500003 :الرقم الضريبي</p>
 
-        <p>C.R: 1010208753 :س .ت</p>
+        <p>C.R: 1010725434 :س .ت</p>
       </div>
-      <div className="clientDataContainer">
-        <div className="L1">
+      <div className="clientDataContainer-p">
+        <div className="L1-p">
           <p>Customer: Expo Customer</p>
           <p>Phone: </p>
         </div>
-        <div className="L1">
+        <div className="L1-p">
           <p>Flat: </p>
           <p>Building:</p>
         </div>
-        <div className="L1">
+        <div className="L1-p">
           <p>Street: </p>
           <p>Block: </p>
         </div>
       </div>
-      <br />
       <hr />
-      <br />
-      <div className="casher">
+
+      <div className="casher-p">
         <p style={{ display: "none" }}>Cachier: </p>
         <p>Salesperson: EXPO </p>
-        <div className="date">
-          <p>{todo.dateMyPC}</p>
-          <span style={{ fontSize: "11px" }}>order# {invoiceNumber.sn}</span>
+        <div className="date-p" style={{ marginTop: "5px" }}>
+          <p>{timeInMyPC}</p>
+          <span style={{ fontSize: "11px" }}>order# {serialNumber}</span>
         </div>
       </div>
-      <div className="p-5">
+      <div className="p-5-p" style={{ padding: "0", marginTop: "5px" }}>
+        {/* ref to chcek  ref={ref}*/}
         <table className="table">
           <thead>
             <tr>
@@ -80,8 +68,8 @@ export const InvoiceToPrint = React.forwardRef((props, ref) => {
             </tr>
           </thead>
           <tbody>
-            {cartItemsArrays.length !== 0
-              ? cartItemsArrays.map((cartProduct, key) => (
+            {cartItems.length !== 0
+              ? cartItems.map((cartProduct, key) => (
                   <tr key={key}>
                     <td>{cartProduct.category} </td>
                     <td>
@@ -97,17 +85,41 @@ export const InvoiceToPrint = React.forwardRef((props, ref) => {
               : ""}
           </tbody>
         </table>
-        <div className="paymentDataContainer">
-          <div className="paymentData ">
-            <div className="L1">
-              <p>Total without VAT </p>
+        <div className="paymentDataContainer-p">
+          <div className="paymentData-p ">
+            {isOffer && (
+              <div className="L1-p" style={{ fontSize: "12px" }}>
+                <p
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <span> المبلغ السابق بدون الضريبة</span>{" "}
+                  <span>Subtotal no discount:</span>{" "}
+                </p>
+                <h4>{itemPriceBefore} SAR</h4>
+              </div>
+            )}
+            {isOffer && (
+              <div className="L1-p">
+                <p>Discount *</p>
+                <p>
+                  <b>{Math.ceil(itemsPrice) - itemPriceBefore} SAR</b>
+                </p>
+              </div>
+            )}
+            <div className="L1-p">
+              <p>Subtotal without VAT </p>
               <p>{Math.ceil(itemsPrice)} SAR</p>
             </div>
-            <div className="L1">
+            <div className="L1-p">
               <p>VAT 15%</p>
               <p>{Math.ceil(itemsPrice * 15) / 100} SAR </p>
             </div>
-            <div className="L1" style={{ fontSize: "12px" }}>
+            <div className="L1-p" style={{ fontSize: "12px" }}>
               <p
                 style={{
                   display: "flex",
@@ -119,48 +131,57 @@ export const InvoiceToPrint = React.forwardRef((props, ref) => {
                 <span style={{ fontWeight: "bold" }}>المبلغ شامل الضريبة</span>{" "}
                 <span>Total Amount include VAT:</span>{" "}
               </p>
-              <h4 style={{ fontSize: "14px" }}>
+              <h4 style={{ fontSize: "20px", color: "red" }}>
                 {(itemsPrice * 15) / 100 + itemsPrice} SAR
               </h4>
             </div>
-            <div className="L1">
+            <div className="L1-p">
               <p> payment by : طريقة الدفع </p>
-              <p>{methodArray.method === "Mada" ? "Mada(مدى)" : "Cash(كاش)"}</p>
+              <p
+                style={{
+                  fontSize: "18px",
+                  background: "#3d69bd",
+                  color: "#fff",
+                }}
+              >
+                {method === "Mada" ? "Mada(مدى) بطاقة" : "Cash(كاش)"}
+              </p>
             </div>
-            {methodArray.method === "Mada" ? (
-              <div className="L1">
+            {method === "Mada" ? (
+              <div className="L1-p">
                 <p> Received: المبلغ المستلم</p>
                 <p> {(itemsPrice * 15) / 100 + itemsPrice} SAR</p>
               </div>
             ) : (
               <>
-                <div className="L1">
+                <div className="L1-p">
                   <p>المبلغ المستلم Received:</p>
-                  <p> {todo.paidandchange.paidMoney} SAR</p>
+                  <p style={{ fontSize: "15px" }}> {paidMoney} SAR</p>
                 </div>
 
-                <div className="L1">
+                <div className="L1-p">
                   <p>المتبقي للعميل Change:</p>
-                  <p>SAR {todo.paidandchange.change}</p>
+                  <p style={{ fontSize: "15px", fontStyle: "italic" }}>
+                    SAR {change}
+                  </p>
                 </div>
               </>
             )}
           </div>
-        </div>{" "}
+        </div>
         <br />
       </div>
       <hr />
-      <br />
       <OfferComponent codeE={"HAS432"} />
-      <hr />
-      <div className="welcome">
+      {/* <div className="welcome">
         <p style={{ marginTop: "10px" }}> نشكركم لاختياركم منتجاتنا </p>
         <p> Thank you for choosing our products</p>
         <p>See you soon!</p>
         <p>😊</p>
-      </div>
+      </div> */}
+      <hr />
     </div>
   );
 });
 
-// join the offer to db to keep in history
+export default Preview;

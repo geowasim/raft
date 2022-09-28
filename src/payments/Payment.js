@@ -9,7 +9,6 @@ export default function Payment(props) {
   const [showMethod, setShowMethod] = useState("Mada");
 
   const {
-    itemsPrice,
     checkPaymentMethod,
     isCach,
     handlePrint,
@@ -18,6 +17,16 @@ export default function Payment(props) {
     isChange,
     handleIsPrint,
     createInvoice,
+    itemsPrice,
+    cartItems,
+    method,
+    paidMoney,
+    change,
+    serialNumber,
+    setHideQuestionShowPay,
+    hideQuestionShowPay,
+    showCalc,
+    setShowCalc,
   } = props;
 
   useEffect(() => {
@@ -38,7 +47,6 @@ export default function Payment(props) {
 
       {showCashe ? (
         <Cash
-          itemsPrice={itemsPrice}
           isCach={isCach}
           handlePrint={handlePrint}
           resetCartItems={resetCartItems}
@@ -46,6 +54,16 @@ export default function Payment(props) {
           isChange={isChange}
           handleIsPrint={handleIsPrint}
           createInvoice={createInvoice}
+          cartItems={cartItems}
+          itemsPrice={itemsPrice}
+          method={method}
+          paidMoney={paidMoney}
+          change={change}
+          serialNumber={serialNumber}
+          setHideQuestionShowPay={setHideQuestionShowPay}
+          hideQuestionShowPay={hideQuestionShowPay}
+          showCalc={showCalc}
+          setShowCalc={setShowCalc}
         />
       ) : (
         <>
@@ -54,7 +72,7 @@ export default function Payment(props) {
       )}
       <button onClick={handleCashe} className="itemButton change">
         {showCashe ? (
-          <>Mada / الرجوع إلى الدفع بالبطاقة</>
+          <div>Mada / الرجوع إلى الدفع بالبطاقة</div>
         ) : (
           <>cash/ لتغير إلى الدفع كاش</>
         )}

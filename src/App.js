@@ -6,8 +6,19 @@ import { AuthContextProvider } from "./context/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Invoices from "./components/Invoices";
 import Pos from "./pages/Pos";
+import Reback from "./components/Reback/Reback";
+import { useState, useContext, createContext } from "react";
+import { auth } from "./firebase";
+
+// const InvoiceRebackContext = createContext();
 
 function App() {
+  const [dataFromInvoice, setDatafromInvoice] = useState({});
+
+  const readDataFromInvoiceComponent = (data) => {
+    setDatafromInvoice(data);
+  };
+
   return (
     <div>
       <AuthContextProvider>
@@ -18,6 +29,9 @@ function App() {
             </li>
             <li>
               <Link to="/invoices">Invoices</Link>
+            </li>
+            <li>
+              <Link to="/reback">Reback</Link>
             </li>
           </ul>
         </nav>
@@ -36,7 +50,17 @@ function App() {
             path="/invoices"
             element={
               <ProtectedRoute>
-                <Invoices />
+                <Invoices
+                // readDataFromInvoiceComponent={readDataFromInvoiceComponent}
+                />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/reback"
+            element={
+              <ProtectedRoute>
+                <Reback dataFromInvoice={dataFromInvoice} />
               </ProtectedRoute>
             }
           />

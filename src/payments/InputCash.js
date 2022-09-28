@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Dialog from "../cart/Dialog";
 import "./styles.css";
 
 const InputCash = (props) => {
@@ -11,6 +12,14 @@ const InputCash = (props) => {
     isChange,
     handleIsPrint,
     createInvoice,
+    cartItems,
+    method,
+    paidMoney,
+    change,
+    serialNumber,
+    itemsPrice,
+    setHideQuestionShowPay,
+    hideQuestionShowPay,
   } = props;
 
   useEffect(() => {
@@ -34,16 +43,18 @@ const InputCash = (props) => {
     setIsPrintShown("isPrintShownT", true);
   };
 
-  const handleRest = () => {
-    setValue(0);
-    props.handleRestCount2();
-    setIsPrintShown(false);
-  };
+  // const handleRest = () => {
+  //   setValue(0);
+  //   props.handleRestCount2();
+  //   setIsPrintShown(false);
+  // };
 
   return (
     <div className="inputCach">
       <button
-        onClick={() => addNum(props.values, props.values2)}
+        onClick={() => {
+          addNum(props.values, props.values2);
+        }}
         className="itemButton"
         style={{
           border: "1px solid gray",
@@ -62,19 +73,37 @@ const InputCash = (props) => {
         ({value <= 0 ? (value * -1).toFixed(2) : ""})<span>ريال سعودي</span>
       </p>
       {isPrintShown ? (
-        <button
-          onClick={function () {
-            handleRest();
-            handlePrint();
-            resetCartItems();
-            handleIsPrint();
-            createInvoice();
-          }}
-          className="itemButton printFromCach"
-        >
-          طباعة الفاتورة{" "}
-        </button>
+        <>
+          <button
+            onClick={function () {
+              // handleRest();
+              // handlePrint();
+              // resetCartItems();
+              // createInvoice();
+              // handleIsPrint();
+              setHideQuestionShowPay(true);
+            }}
+            className="itemButton printFromCach"
+          >
+            معاينة الفاتورة{" "}
+          </button>
+        </>
       ) : null}
+      {hideQuestionShowPay && (
+        <Dialog
+          resetCartItems={resetCartItems}
+          handlePrint={handlePrint}
+          handleIsPrint={handleIsPrint}
+          createInvoice={createInvoice}
+          cartItems={cartItems}
+          itemsPrice={itemsPrice}
+          method={method}
+          paidMoney={paidMoney}
+          change={change}
+          serialNumber={serialNumber}
+          setHideQuestionShowPay={setHideQuestionShowPay}
+        />
+      )}
     </div>
   );
 };

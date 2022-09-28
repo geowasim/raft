@@ -1,12 +1,22 @@
 import "./dialog.css";
-function Dialog({
-  createInvoice,
-  resetCartItems,
-  handlePrint,
-  handleIsPrint,
-  setHideQuestionShowPay,
-  totalPrice,
-}) {
+import Preview from "./Preview";
+function Dialog(props) {
+  const {
+    setHideQuestionShowPay,
+    resetCartItems,
+    handlePrint,
+    handleIsPrint,
+    createInvoice,
+    cartItems,
+    itemsPrice,
+    method,
+    paidMoney,
+    change,
+    serialNumber,
+    itemPriceBefore,
+    isOffer,
+  } = props;
+
   return (
     <div
       style={{
@@ -16,6 +26,7 @@ function Dialog({
         right: "0",
         bottom: "0",
         backgroundColor: "rgba(0,0,0,0.5)",
+        zIndex: 5,
       }}
       onClick={() => setHideQuestionShowPay(false)}
     >
@@ -27,7 +38,6 @@ function Dialog({
           alignItems: "center",
           justifyContent: "center",
           position: "absolute",
-          width: "500px",
           top: "50%",
           left: "50%",
           transform: "translate(-50%,-50%)",
@@ -36,13 +46,36 @@ function Dialog({
           borderRadius: "10px",
           color: "#3d3d3d",
           fontFamily: "'El Messiri','sans-serif'",
+          height: "100vh",
         }}
       >
-        <h3 style={{ fontSize: "24px" }}>(مدى-Mada ) الدفع بطاقة </h3>
-        <h4> هل تم استلام مبلغ</h4>
-        <h1 style={{ color: "#0000aa", fontSize: "24px", margin: "15px 0" }}>
-          ("<span>ريال</span> "{totalPrice})
-        </h1>
+        <Preview
+          cartItems={cartItems}
+          itemsPrice={itemsPrice}
+          method={method}
+          paidMoney={paidMoney}
+          change={change}
+          serialNumber={serialNumber}
+          resetCartItems={resetCartItems}
+          handlePrint={handlePrint}
+          handleIsPrint={handleIsPrint}
+          createInvoice={createInvoice}
+          itemPriceBefore={itemPriceBefore}
+          isOffer={isOffer}
+        />
+        <h3
+          style={{
+            fontSize: "24px",
+            marginBottom: "10px",
+            borderRadius: "5px",
+            width: "98%",
+          }}
+          className="warning"
+        >
+          طريقة الدفع
+          {method === "Mada" ? <span>- بطاقة</span> : <span> كاش</span>}
+        </h3>
+
         <div style={{ display: "flex", alignItems: "center" }}>
           <button onClick={() => setHideQuestionShowPay(false)} className="no">
             لا - الرجوع للقائمة السابقة{" "}
@@ -50,10 +83,10 @@ function Dialog({
           <button
             onClick={() => {
               setHideQuestionShowPay(false);
-              createInvoice();
               handleIsPrint();
               handlePrint();
               resetCartItems();
+              createInvoice();
             }}
             className="yes"
           >

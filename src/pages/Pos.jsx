@@ -1,10 +1,12 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { UserAuth } from "../context/AuthContext";
+import { auth } from "../firebase";
 import Main from "../Main";
 import "./Pos.css";
-const Pos = () => {
+const Pos = ({ readEcode }) => {
   const { user, logout } = UserAuth();
+
   const navigate = useNavigate();
 
   const handleLogout = async () => {
@@ -20,6 +22,21 @@ const Pos = () => {
   return (
     <>
       <Main />
+      {/* {user && (
+        <button
+          style={{
+            position: "absolute",
+            top: "0px",
+            right: "50%",
+            zIndex: "-1",
+          }}
+        >
+          {auth.currentUser.email
+            .slice(0, auth.currentUser.email.indexOf("@"))
+            .toUpperCase()}{" "}
+          - مرحباً بك
+        </button>
+      )} */}
       <button onClick={handleLogout} className="border px-6 py-2 my-4 logout">
         Logout
       </button>

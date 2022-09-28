@@ -1,50 +1,14 @@
 import Products from "./products/Products";
 import "./App.css";
 import Item from "./Item/Item";
-import { useState, useEffect, createContext } from "react";
+import { useState } from "react";
 import Basket from "./cart/Cart";
-
-function padTo2Digits(num) {
-  return num.toString().padStart(2, "0");
-}
-
-function formatDate(date) {
-  return [
-    date.getFullYear(),
-
-    padTo2Digits(date.getMonth() + 1),
-    padTo2Digits(date.getDate()),
-  ].join("");
-}
-
-const OrderNumberContext = createContext();
 
 function Main() {
   const [item, setItem] = useState(null);
   const [cartItems, setCartItems] = useState([]);
-  const [orderNumber, setOrderNumber] = useState(formatDate(new Date()) + 1000);
   const [isPrint, setIsPrint] = useState(false);
-
-  const [data, setData] = useState(
-    JSON.parse(localStorage.getItem("SN")) || [
-      {
-        sn: orderNumber,
-        items: [],
-        totalWithoutVat: 0,
-        vat: 0,
-        Amount: 0,
-        qty: 0,
-        method: "",
-        paid: 0,
-        change: 0,
-        dateTime: `${
-          new Date().toLocaleTimeString() +
-          " - " +
-          new Date().toLocaleDateString()
-        }`,
-      },
-    ]
-  );
+  const [showCalc, setShowCalc] = useState(false);
 
   const resetCartItems = () => {
     setCartItems([]);
@@ -85,7 +49,7 @@ function Main() {
   };
 
   return (
-    <OrderNumberContext.Provider value={orderNumber}>
+    <>
       <div className="App">
         <header
           className="App-header"
@@ -94,7 +58,7 @@ function Main() {
           <Products findItem={findItem} handleIsPrint={handleIsPrint} />
         </header>
         {isPrint ? (
-          <Item item={item} onAdd={onAdd} />
+          <Item item={item} onAdd={onAdd} setShowCalc={setShowCalc} />
         ) : (
           <div className="chooseItem"> اختر منتج</div>
         )}
@@ -104,10 +68,12 @@ function Main() {
           onRemove={onRemove}
           resetCartItems={resetCartItems}
           handleIsPrint={handleIsPrint}
+          showCalc={showCalc}
+          setShowCalc={setShowCalc}
         />
         {/* <Invoice cartItems={cartItems} totalPrice={totalPrice} /> */}
       </div>
-    </OrderNumberContext.Provider>
+    </>
   );
 }
 

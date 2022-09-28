@@ -105,3 +105,12 @@
 .itemButton:disabled {
   cursor: auto;
 }
+
+@media screen and (max-width: 1000px) {
+  .itemImage {
+    width: 100px;
+    height: auto;
+  }
+  .itemName {
+  }
+}
