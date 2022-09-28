@@ -207,7 +207,7 @@ export const ComponentToPrint = React.forwardRef((props, ref) => {
       </div>
       <hr />
       <br />
-      {offerOrNot && <OfferComponent codeE={"HAS432"} />}
+      <OfferComponent codeE={"HAS432"} />
       {/* <div
         style={{
           display: "flex",
