@@ -7,14 +7,13 @@ export function getTLVForValue(tagNum, tagValue) {
   let bufsArray = [tagBuf, tagValueLenBuf, tagValueBuf];
 
   return Buffer.concat(bufsArray);
-  
 }
 
 /**
  * inside the print component
  *  //----------------
 
-  /**
+  
    * 
    //1.Seller Name
    let sellerNameBuf = getTLVForValue("1", "Alnathra Al-Raqiqa");
@@ -39,8 +38,7 @@ export function getTLVForValue(tagNum, tagValue) {
     let qrCodeB64 = qrCodeBuf.toString("base64");
     
     */
-  //-------------
- */
+//-------------
 
 // export function getBarcode() {
 // cn, vr, t, to, va;
