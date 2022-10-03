@@ -7,6 +7,7 @@ import QRCode from "react-qr-code";
 
 import "./ComponentToPrint.css";
 import { getTLVForValue } from "./BarcodeFunction";
+import { Invoice } from "@axenda/zatca";
 
 export const ComponentToPrint = React.forwardRef((props, ref) => {
   const {
@@ -22,35 +23,48 @@ export const ComponentToPrint = React.forwardRef((props, ref) => {
     itemPriceBefore,
     offerOrNot,
   } = props;
+  window.Buffer = Buffer;
 
   let timeBuf = `${timeInMyPC}`;
   let totalWithVat = String(((itemsPrice * 15) / 100 + itemsPrice).toFixed(2));
   let totalVat = String((itemsPrice * 0.15).toFixed(2));
 
   //----------------
+  const invoice = new Invoice({
+    sellerName: "النظرة الرقيقه للتجارة",
+    vatRegistrationNumber: "310430668500003",
+    invoiceTimestamp: timeBuf,
+    invoiceTotal: totalWithVat,
+    invoiceVatTotal: totalVat,
+  });
 
-  //1.Seller Name
-  let sellerNameBuf = getTLVForValue("1", "Alnathra Al-Raqiqa");
-  //2.Vat Registration
-  let vatRegistrationNameBuf = getTLVForValue("2", "310430668500003");
-  //Seller Name
-  let timeStampBuf = getTLVForValue("3", timeBuf);
-  //Seller Name
-  let taxTotalNameBuf = getTLVForValue("4", totalWithVat);
-  //Seller Name
-  let vatTotalBuf = getTLVForValue("5", totalVat);
+  //----------------
 
-  let tagsBufsArray = [
-    sellerNameBuf,
-    vatRegistrationNameBuf,
-    timeStampBuf,
-    taxTotalNameBuf,
-    vatTotalBuf,
-  ];
-
-  let qrCodeBuf = Buffer.concat(tagsBufsArray);
-  let qrCodeB64 = qrCodeBuf.toString("base64");
-
+  /**
+   * 
+   //1.Seller Name
+   let sellerNameBuf = getTLVForValue("1", "Alnathra Al-Raqiqa");
+   //2.Vat Registration
+   let vatRegistrationNameBuf = getTLVForValue("2", "310430668500003");
+   //Seller Name
+   let timeStampBuf = getTLVForValue("3", timeBuf);
+   //Seller Name
+   let taxTotalNameBuf = getTLVForValue("4", totalWithVat);
+   //Seller Name
+   let vatTotalBuf = getTLVForValue("5", totalVat);
+   
+   let tagsBufsArray = [
+     sellerNameBuf,
+     vatRegistrationNameBuf,
+     timeStampBuf,
+     taxTotalNameBuf,
+     vatTotalBuf,
+    ];
+    
+    let qrCodeBuf = Buffer.concat(tagsBufsArray);
+    let qrCodeB64 = qrCodeBuf.toString("base64");
+    
+    */
   //-------------
 
   // console.log("itemsPrice", itemsPrice);
@@ -232,7 +246,7 @@ export const ComponentToPrint = React.forwardRef((props, ref) => {
           className="qr-code"
           size={256}
           style={{ height: "auto", maxWidth: "100%", width: "100%" }}
-          value={qrCodeB64}
+          value={invoice.toBase64()}
           viewBox={`0 0 256 256`}
         />
       </div>
