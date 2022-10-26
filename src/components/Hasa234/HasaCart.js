@@ -37,34 +37,29 @@ const Basket = (props) => {
   const [change, setChange] = useState(null);
   const [hideQuestionShowPay, setHideQuestionShowPay] = useState(false);
   const [isOffer, setIsOffer] = useState(false);
-  const [codeE, setCodeE] = useState("RYD1122");
+  const [codeE, setCodeE] = useState("HAS432");
 
-  const priceBeforeDiscount = cartItems.reduce(
-    (a, c) => a + c.price * c.qty,
-    0
-  );
-  const otherPrice = totalBeforeAfterOfferType(cartItems, codeE).otherPrice;
-
-  const perfumePrice = totalBeforeAfterOfferType(cartItems, codeE).after;
+  const otherPrice = totalBeforeAfterOfferType(cartItems).otherPrice;
+  const perfumePrice = totalBeforeAfterOfferType(cartItems).after;
 
   useEffect(() => {
-    if (
-      Math.max(...totalBeforeAfterOfferType(cartItems, codeE).offerType) > 1
-    ) {
+    if (Math.max(...totalBeforeAfterOfferType(cartItems).offerType) > 1) {
       setIsOffer(true);
     } else {
       setIsOffer(false);
     }
   }, [cartItems]);
 
-  const itemPriceBefore = totalBeforeAfterOfferType(cartItems, codeE).before;
+  // console.log(totalBeforeAfterOfferType(cartItems));
+  const itemPriceBefore = totalBeforeAfterOfferType(cartItems).before;
   // console.log(itemPriceBefore * 0.15 + itemPriceBefore);
   const itemsPrice = perfumePrice + otherPrice;
 
   const totalItems = cartItems.reduce((a, c) => a + c.qty, 0);
 
   const taxPrice = itemsPrice * 0.15;
-  const totalPrice = Number(taxPrice) + Number(itemsPrice.toFixed(2));
+  // const bagPrice = itemsPrice > 300 ? 0 : 7;
+  const totalPrice = taxPrice + itemsPrice;
 
   const componentRef = useRef();
   const handleReactToPrint = useReactToPrint({
@@ -91,16 +86,13 @@ const Basket = (props) => {
     setChange(value <= 0 ? (value * -1).toFixed(2) : "");
   };
 
-  const [serialNumber, setSerialNumber] = useState(null || 1000375);
+  const [serialNumber, setSerialNumber] = useState(null || 1000296);
 
   //get lastSn //
   //get data frm const {second} = first
   // Read todo from firebase
   useEffect(() => {
-    const q = query(
-      collection(db, "ryd1122"),
-      orderBy("invoiceNumber", "desc")
-    );
+    const q = query(collection(db, "hasa22"), orderBy("invoiceNumber", "desc"));
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       let todosArr = [];
       querySnapshot.forEach((doc) => {
@@ -116,7 +108,7 @@ const Basket = (props) => {
 
   // Create invoice
   const createInvoice = async () => {
-    await addDoc(collection(db, "ryd1122"), {
+    await addDoc(collection(db, "hasa22"), {
       methodArray: {
         method: method,
       },
@@ -137,9 +129,6 @@ const Basket = (props) => {
         0,
         auth.currentUser.email.indexOf("@")
       ),
-      discount: {
-        amount: "25%",
-      },
     });
   };
   return (
@@ -171,10 +160,13 @@ const Basket = (props) => {
             <div key={item.id} className="row">
               <div className="basketTitle">{item.description}</div>
               <div className="basketIND">
-                <button onClick={() => onAdd(item)} className=" add">
+                <button onClick={() => onAdd(item)} className="itemButton add">
                   +
                 </button>
-                <button onClick={() => onRemove(item)} className=" remove">
+                <button
+                  onClick={() => onRemove(item)}
+                  className="itemButton remove"
+                >
                   -
                 </button>
               </div>
@@ -217,7 +209,7 @@ const Basket = (props) => {
                   margin: "15px 15px",
                 }}
               >
-                <span> السعر الاجمالي قبل الخصم </span>
+                <span>السعر الاجمالي</span>
               </div>
               <div
                 style={{
@@ -226,38 +218,7 @@ const Basket = (props) => {
                   marginLeft: "15px",
                 }}
               >
-                <span> ر.س</span>{" "}
-                {priceBeforeDiscount * 0.15 + priceBeforeDiscount}
-              </div>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  marginLeft: "15px",
-                }}
-              >
-                {" "}
-                <span style={{ color: "transparent" }}>عدد القطع</span> -{" "}
-              </div>
-            </div>
-            <div className="row " style={{ margin: "10px 0" }}>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  margin: "15px 15px",
-                }}
-              >
-                <span> السعر الاجمالي بعد خصم %25</span>
-              </div>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  marginLeft: "15px",
-                }}
-              >
-                <span> ر.س</span> {Number(totalPrice.toFixed(2))}
+                <span> ر.س</span> {totalPrice}
               </div>
               <div
                 style={{

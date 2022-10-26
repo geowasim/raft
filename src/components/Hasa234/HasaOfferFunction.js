@@ -1,24 +1,8 @@
-export function totalBeforeAfterOfferType(cartItems, codeE) {
+export function totalBeforeAfterOfferType(cartItems) {
   const sortOther = cartItems.filter((x) => x.category !== "Perfume");
   const otherPrice = sortOther.reduce((a, c) => a + c.price * c.qty, 0);
+
   const sortPerfumes = cartItems.filter((x) => x.category === "Perfume");
-
-  if (codeE === "RYD1122" && cartItems.length !== 0) {
-    // discount 25% for all products
-
-    const itemsPriceBefore = cartItems.reduce((a, c) => a + c.price * c.qty, 0);
-    const discount = itemsPriceBefore * 0.25;
-    const total = itemsPriceBefore - discount;
-
-    //offerType > 1 in the cart to run the offer
-    return {
-      before: itemsPriceBefore,
-      after: total,
-      offerType: [2],
-      otherPrice: 0,
-    };
-  }
-
   // console.log(sortPerfumes);
 
   if (sortPerfumes.length) {

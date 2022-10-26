@@ -25,7 +25,6 @@
   display: flex;
   position: absolute;
   bottom: 102px;
-  right: 1.5vw;
   background-color: #ffbe59;
   height: 15px;
   justify-content: center;
@@ -82,7 +81,6 @@
   height: 35px;
   justify-content: center;
   align-items: center;
-  font-size: 30px;
   bottom: 142px;
 }
 

@@ -29,20 +29,16 @@ const OneInvoice = ({
     paidandchange,
     dateMyPC,
     totalPrice,
-    off,
   } = todo;
-
-  const { codeE } = off;
-
   const { isOffer } = todo.off ? todo.off : "";
   const { change, paidMoney } = paidandchange;
   const serialNumber = invoiceNumber.sn;
   const timeInMyPC = todo.off ? dateMyPC : new Date(dateMyPC).toISOString();
 
-  const otherPrice = totalBeforeAfterOfferType(cartItems, codeE).otherPrice;
-  const perfumePrice = totalBeforeAfterOfferType(cartItems, codeE).after;
+  const otherPrice = totalBeforeAfterOfferType(cartItems).otherPrice;
+  const perfumePrice = totalBeforeAfterOfferType(cartItems).after;
 
-  const itemPriceBefore = totalBeforeAfterOfferType(cartItems, codeE).before;
+  const itemPriceBefore = totalBeforeAfterOfferType(cartItems).before;
 
   const itemsPrice = perfumePrice + otherPrice;
 
@@ -70,10 +66,11 @@ const OneInvoice = ({
   return (
     <div className="myOneInvoice">
       <p>{todo.invoiceNumber.sn}</p>
-      <p>{Number(((subtotal * 15) / 100 + subtotal).toFixed(2))}</p>
+      <p>{(subtotal * 15) / 100 + subtotal}</p>
       <p>{totalItems}</p>
       <p>{methodArray.method}</p>
       <p>{todo.dateMyPC}</p>
+
       <p
         onClick={function () {
           handlePrint();

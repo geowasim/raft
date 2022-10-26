@@ -61,7 +61,8 @@ export default function Cash(props) {
       </h2>
 
       <h2 className="TP">
-        المبلغ المطلوب : <span> {count * 0.15 + count} ريال </span>
+        المبلغ المطلوب :{" "}
+        <span> {Number((count * 0.15 + count).toFixed(2))} ريال </span>
       </h2>
       <div className="cachChange">
         <input

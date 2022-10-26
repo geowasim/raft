@@ -1,46 +1,58 @@
-import React from "react";
-import OfferComponent from "../../OffersComponent/OfferComponent";
-import "./InvoiceToPrint.css";
+import React, { useEffect } from "react";
+import { Buffer } from "buffer";
 
-export const InvoiceToPrint = React.forwardRef((props, ref) => {
-  const { todo, cartItemsArrays, methodArray, invoiceNumber } = props;
-  // const {  itemsPrice, method, paidMoney, change, serialNumber } =
-  //   props;
+import QRCode from "react-qr-code";
 
-  const itemsPrice = cartItemsArrays.reduce((a, c) => a + c.price * c.qty, 0);
-  // const itemsPrice = cartItemsArrays.reduce((a, c) => a + c.price * c.qty, 0);
-  // const totalItems = cartItemsArrays.reduce((a, c) => a + c.qty, 0);
+import { Invoice } from "@axenda/zatca";
+import OfferComponent from "../../../OffersComponent/OfferComponent";
 
-  // const taxPrice = itemsPrice * 0.15;
-  // const bagPrice = itemsPrice > 300 ? 0 : 7;
-  // const totalPrice = taxPrice + itemsPrice;
+export const ComponentToPrint = React.forwardRef((props, ref) => {
+  const {
+    cartItems,
+    itemsPrice,
+    method,
+    paidMoney,
+    change,
+    serialNumber,
+    timeInMyPC,
+    // totalPrice,
+    isOffer,
+    itemPriceBefore,
+    offerOrNot,
+  } = props;
+  window.Buffer = Buffer;
 
-  // function calculateDateTime() {
-  //   var timestamp = todo.date.seconds * 1000;
-  //   var date = new Date(timestamp);
+  let timeBuf = `${timeInMyPC}`;
 
-  //   return `${date.getDate()}/${
-  //     date.getMonth() + 1
-  //   }/${date.getFullYear()}-${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
-  // }
+  let totalWithVat = String(((itemsPrice * 15) / 100 + itemsPrice).toFixed(2));
+  let totalVat = String((itemsPrice * 0.15).toFixed(2));
+
+  //----------------
+  const invoice = new Invoice({
+    sellerName: "النظرة الرقيقه للتجارة",
+    vatRegistrationNumber: "310430668500003",
+    invoiceTimestamp: timeBuf,
+    invoiceTotal: totalWithVat,
+    invoiceVatTotal: totalVat,
+  });
 
   return (
     <div className="fatorah" ref={ref}>
       <div className="com_title">
-        <h2>Qandella</h2>
-        <h2> كانديـــلا </h2>
+        {/* <h2>Qandella</h2> */}
+        <h2>مؤسسة النظرة الرقيقه للتجارة </h2>
         <br />
         <div className="under_line"></div>
         <br />
       </div>
       <div className="perData">
-        <p>معرض صناع العطور - الاحساء</p>
+        <p>معرض صناع العطور الثاني - الطائف</p>
         <p>Simplified Vat Invoice</p>
         <p>فاتورة ضريبية مبسطة</p>
 
         <p>Vat: 310430668500003 :الرقم الضريبي</p>
 
-        <p>C.R: 1010208753 :س .ت</p>
+        <p>C.R: 1010725434 :س .ت</p>
       </div>
       <div className="clientDataContainer">
         <div className="L1">
@@ -63,25 +75,26 @@ export const InvoiceToPrint = React.forwardRef((props, ref) => {
         <p style={{ display: "none" }}>Cachier: </p>
         <p>Salesperson: EXPO </p>
         <div className="date">
-          <p>{todo.dateMyPC}</p>
-          <span style={{ fontSize: "11px" }}>order# {invoiceNumber.sn}</span>
+          <p>{timeInMyPC}</p>
+          <span style={{ fontSize: "11px" }}>order# {serialNumber}</span>
         </div>
       </div>
       <div className="p-5">
+        {/* ref to chcek  ref={ref}*/}
         <table className="table">
           <thead>
             <tr>
-              <td>Category</td>
-              <td>Description</td>
+              <td>الصنف</td>
+              <td>الوصف</td>
               <td>Vol-مل</td>
-              <td>Qty</td>
-              <td>Price</td>
-              <td>Total</td>
+              <td>الكمية</td>
+              <td>السعر</td>
+              <td>المجموع</td>
             </tr>
           </thead>
           <tbody>
-            {cartItemsArrays.length !== 0
-              ? cartItemsArrays.map((cartProduct, key) => (
+            {cartItems.length !== 0
+              ? cartItems.map((cartProduct, key) => (
                   <tr key={key}>
                     <td>{cartProduct.category} </td>
                     <td>
@@ -99,12 +112,36 @@ export const InvoiceToPrint = React.forwardRef((props, ref) => {
         </table>
         <div className="paymentDataContainer">
           <div className="paymentData ">
+            {isOffer && (
+              <div className="L1" style={{ fontSize: "12px" }}>
+                <p
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <span> المبلغ السابق بدون الضريبة</span>{" "}
+                  <span>Subtotal no discount:</span>{" "}
+                </p>
+                <h4>{itemPriceBefore} SAR</h4>
+              </div>
+            )}
+            {isOffer && (
+              <div className="L1">
+                <p>Discount * الخصم</p>
+                <p>
+                  <b>{Math.ceil(itemsPrice) - itemPriceBefore} SAR</b>
+                </p>
+              </div>
+            )}
             <div className="L1">
-              <p>Total without VAT </p>
+              <p>Total without VAT - المجموع بدون الضريبة</p>
               <p>{Math.ceil(itemsPrice)} SAR</p>
             </div>
             <div className="L1">
-              <p>VAT 15%</p>
+              <p>VAT 15% الضريبة</p>
               <p>{Math.ceil(itemsPrice * 15) / 100} SAR </p>
             </div>
             <div className="L1" style={{ fontSize: "12px" }}>
@@ -125,9 +162,9 @@ export const InvoiceToPrint = React.forwardRef((props, ref) => {
             </div>
             <div className="L1">
               <p> payment by : طريقة الدفع </p>
-              <p>{methodArray.method === "Mada" ? "Mada(مدى)" : "Cash(كاش)"}</p>
+              <p>{method === "Mada" ? "Card(بطاقة)" : "Cash(كاش)"}</p>
             </div>
-            {methodArray.method === "Mada" ? (
+            {method === "Mada" ? (
               <div className="L1">
                 <p> Received: المبلغ المستلم</p>
                 <p> {(itemsPrice * 15) / 100 + itemsPrice} SAR</p>
@@ -136,23 +173,43 @@ export const InvoiceToPrint = React.forwardRef((props, ref) => {
               <>
                 <div className="L1">
                   <p>المبلغ المستلم Received:</p>
-                  <p> {todo.paidandchange.paidMoney} SAR</p>
+                  <p> {paidMoney} SAR</p>
                 </div>
 
                 <div className="L1">
                   <p>المتبقي للعميل Change:</p>
-                  <p>SAR {todo.paidandchange.change}</p>
+                  <p>SAR {change}</p>
                 </div>
               </>
             )}
           </div>
-        </div>{" "}
+        </div>
         <br />
       </div>
       <hr />
       <br />
-      <OfferComponent codeE={"RYD1122"} />
+      <br />
+      <div
+        className="qr-container"
+        style={{
+          height: "auto",
+          margin: "0 auto",
+          maxWidth: 180,
+          width: "100%",
+          marginTop: "15px",
+        }}
+      >
+        <QRCode
+          className="qr-code"
+          size={256}
+          style={{ height: "auto", maxWidth: "100%", width: "100%" }}
+          value={invoice.toBase64()}
+          viewBox={`0 0 256 256`}
+        />
+      </div>
+      <br />
       <hr />
+
       <div className="welcome">
         <p style={{ marginTop: "10px" }}> نشكركم لاختياركم منتجاتنا </p>
         <p> Thank you for choosing our products</p>
@@ -162,5 +219,3 @@ export const InvoiceToPrint = React.forwardRef((props, ref) => {
     </div>
   );
 });
-
-// join the offer to db to keep in history

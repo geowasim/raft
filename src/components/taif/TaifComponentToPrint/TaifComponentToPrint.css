@@ -1,0 +1,157 @@
+/* @import url("https://fonts.googleapis.com/css2?family=Silkscreen&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap");
+
+.fatorah {
+  font-family: "Source Code Pro", "Silkscreen", cursive;
+  font-size: 0.7rem;
+  height: 90vh;
+  padding: 12px 6px;
+  text-align: center;
+  padding: 10px;
+  color: #000;
+}
+.com_title {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.under_line {
+  content: "asdasdasd";
+  width: 50%;
+  height: 1px;
+  background-color: #000;
+}
+
+.g1 {
+  margin-top: 15px;
+}
+
+.clientDataContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin: 0 15px;
+  width: 100%;
+}
+
+.L1 {
+  display: flex;
+  justify-content: flex-start;
+  text-align: start;
+  margin-top: 5px;
+}
+
+.L1 p,
+.L1 h4 {
+  flex: 1;
+  font-size: 0.9em;
+}
+
+p {
+  font-size: 12px;
+}
+
+.paymentDataContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 12px;
+}
+
+.paymentData {
+  display: flex;
+  width: 90%;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.paymentData .L1 {
+  display: flex;
+  text-align: center;
+  margin-top: 0;
+}
+
+.paymentData .L1 h4,
+.paymentData .L1 p {
+  border: 1px dotted gray;
+  border-collapse: collapse;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.fatorah hr {
+  height: 0.5px;
+  background-color: #000;
+  border: none;
+}
+
+.casher {
+  font-size: 9px;
+}
+.date {
+  margin-top: 25px;
+}
+
+.tableContainer {
+  display: flex;
+  justify-content: space-around;
+}
+
+table,
+td,
+th {
+  margin: 0 13px;
+  border: 0.5px dashed rgb(32, 32, 32);
+}
+
+table {
+  border-collapse: collapse;
+}
+
+.itemButton1 {
+  appearance: button;
+  background-color: #e8a6f8;
+  border: solid transparent;
+  border-radius: 16px;
+  border-width: 0 0 4px;
+  box-sizing: border-box;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: din-round, sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  line-height: 20px;
+  margin: 0;
+  outline: none;
+  overflow: visible;
+  padding: 13px 16px;
+  text-align: center;
+  text-transform: uppercase;
+  touch-action: manipulation;
+  transform: translateZ(0);
+  transition: filter 0.2s;
+  user-select: none;
+  -webkit-user-select: none;
+  vertical-align: middle;
+  white-space: nowrap;
+  width: 50%;
+  margin: 12px 0;
+  color: rgb(27, 3, 105);
+  margin-right: 15px;
+}
+
+.paid {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.p-5 {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 15px;
+} */

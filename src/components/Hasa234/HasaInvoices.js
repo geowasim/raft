@@ -33,9 +33,9 @@ function Invoices(props) {
   // Read todo from firebase
   useEffect(() => {
     const q = query(
-      collection(db, "ryd1122"),
+      collection(db, "hasa22"),
       orderBy("invoiceNumber", "desc"),
-      where("invoiceNumber", ">", { sn: 1000374 })
+      where("invoiceNumber", ">", { sn: 1000295 })
     );
 
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
@@ -50,20 +50,20 @@ function Invoices(props) {
 
   // Update todo in firebase
   const toggleComplete = async (todo) => {
-    await updateDoc(doc(db, "ryd1122", todo.id), {
+    await updateDoc(doc(db, "hasa22", todo.id), {
       completed: !todo.completed,
     });
   };
 
   // Delete todo
   const deleteTodo = async (id) => {
-    await deleteDoc(doc(db, "ryd1122", id));
+    await deleteDoc(doc(db, "hasa22", id));
   };
 
   const handleEdit = async (id, todo) => {
     // console.log("edit id", id);
     // console.log("todo edit", todo);
-    await updateDoc(doc(db, "ryd1122", todo.id), {
+    await updateDoc(doc(db, "hasa22", todo.id), {
       // do things
       // completed: !todo.completed,
     });
@@ -71,13 +71,12 @@ function Invoices(props) {
 
   const total = todos.reduce((a, c) => a + c.totalPrice, 0);
   const soldItems = todos.reduce((a, c) => a + c.totalItems, 0);
-
   return (
     <div className={`${style.bg} invoices`}>
       <div className={style.container}>
         <h3 className={style.heading}>Invoices</h3>
         <div className="totalInfo">
-          <p>Total Income : {Number(total.toFixed(2))}</p>
+          <p>Total Income : {total.toFixed(2)}</p>
           <p>Total sold items : {soldItems}</p>
         </div>
         <div className="myOneInvoice customers">

@@ -34,7 +34,15 @@ const OfferComponent = (props) => {
         <hr />
       </div>
     );
-  } else {
+  } else if (props.codeE === "RYD1122") {
+    return (
+      <div className="offer-component">
+        <p>
+          {" "}
+          25% الخصومات على جميع الأصناف<span>*</span>
+        </p>
+      </div>
+    );
   }
 };
 

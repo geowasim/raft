@@ -75,6 +75,7 @@ const InputCash = (props) => {
       {isPrintShown ? (
         <>
           <button
+            style={{ marginRight: "5vw" }}
             onClick={function () {
               // handleRest();
               // handlePrint();

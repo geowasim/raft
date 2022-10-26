@@ -9,6 +9,7 @@ import Pos from "./pages/Pos";
 import Reback from "./components/Reback/Reback";
 import { useState, useContext, createContext } from "react";
 import { auth } from "./firebase";
+import TaifInvoices from "./components/taif/TaifInvoices";
 
 // const InvoiceRebackContext = createContext();
 
@@ -30,6 +31,9 @@ function App() {
             <li>
               <Link to="/invoices">Invoices</Link>
             </li>
+            {/* <li>
+              <Link to="/taif">Taif</Link>
+            </li> */}
             <li>
               <Link to="/reback">Reback</Link>
             </li>
@@ -56,6 +60,16 @@ function App() {
               </ProtectedRoute>
             }
           />
+          {/* <Route
+            path="/taif"
+            element={
+              <ProtectedRoute>
+                <TaifInvoices
+                // readDataFromInvoiceComponent={readDataFromInvoiceComponent}
+                />
+              </ProtectedRoute>
+            }
+          /> */}
           <Route
             path="/reback"
             element={

@@ -39,7 +39,7 @@
 }
 
 .itemDes {
-  margin-top: 25px;
+  margin-bottom: 25px;
   font-size: 18px;
   font-family: "El Messiri", sans-serif;
 }
@@ -55,7 +55,7 @@
   cursor: pointer;
   display: inline-block;
   font-family: "El Messiri", sans-serif;
-  font-size: 15px;
+  /* font-size: 15px; */
   font-weight: 700;
   letter-spacing: 0.8px;
   line-height: 20px;
@@ -72,7 +72,7 @@
   -webkit-user-select: none;
   vertical-align: middle;
   white-space: nowrap;
-  width: 90%;
+  width: auto;
   margin: 12px 0;
   font-family: "" El Messiri "", sans-serif;
 }

@@ -6,7 +6,10 @@
     "image": "https://i.ibb.co/5TDcBYT/Perfume-Fiore-2.jpg",
     "price": "199",
     "description": "عطر فيوري",
-    "vol": "200"
+    "vol": "200",
+    "top": "البرغموت والورد",
+    "heart": "خشب الأرز والباتشولي",
+    "base": "خشب الصندل والعنبر"
   },
   {
     "id": 2,
@@ -15,7 +18,10 @@
     "image": "https://i.ibb.co/Yh8h1mp/Perfume-Oro-2.jpg",
     "price": "199",
     "description": "عطر أورو",
-    "vol": "200"
+    "vol": "200",
+    "top": "أخشاب الورد",
+    "heart": "الفانيليا و الفلفل",
+    "base": "نجيل الهند او لتونكا"
   },
   {
     "id": 3,
@@ -24,7 +30,10 @@
     "image": "https://i.ibb.co/C1Q6DJz/Perfume-Stella-2.jpg",
     "price": "199",
     "description": "عطر ستيلا",
-    "vol": "200"
+    "vol": "200",
+    "top": "البرتقال والياسمين",
+    "heart": "المسك وزهر العسل",
+    "base": "الرانجون و الفانيلا"
   },
   {
     "id": 4,
@@ -33,7 +42,10 @@
     "image": "https://i.ibb.co/86QVWQz/Perfume-Viola-2.jpg",
     "price": "199",
     "description": " عطر فيولا",
-    "vol": "200"
+    "vol": "200",
+    "top": "هيل وتوابل",
+    "heart": "الجلد والمسك",
+    "base": "الصندل والجلد"
   },
   {
     "id": 5,
@@ -42,7 +54,10 @@
     "image": "https://i.ibb.co/NmR8SZ3/Hair-Mist-Stella-2.jpg",
     "price": "68",
     "description": "معطر شعر ستيلا",
-    "vol": "30"
+    "vol": "30",
+    "top": "البرغموت",
+    "heart": "المسك وزهر العسل",
+    "base": "خشب الصندل"
   },
   {
     "id": 6,
@@ -51,7 +66,10 @@
     "image": "https://i.ibb.co/hdndGG3/Hair-Mist-Fiore-2.jpg",
     "price": "68",
     "description": "معطر شعر فيوري",
-    "vol": "30"
+    "vol": "30",
+    "top": "هيل وتوابل",
+    "heart": "الجلد والمسك",
+    "base": "الصندل والجلد"
   },
   {
     "id": 7,
@@ -60,7 +78,10 @@
     "image": "https://i.ibb.co/HN55H5T/Odor-Fiore-1.jpg",
     "price": "49",
     "description": "معطر جو فيوري",
-    "vol": "300"
+    "vol": "300",
+    "top": "هيل وتوابل",
+    "heart": "الجلد والمسك",
+    "base": "الصندل والجلد"
   },
   {
     "id": 8,
@@ -69,7 +90,10 @@
     "image": "https://i.ibb.co/yNqKxBm/Odor-Stella-1.jpg",
     "price": "49",
     "description": "معطر جو ستيلا",
-    "vol": "300"
+    "vol": "300",
+    "top": "البرغموت",
+    "heart": "المسك وزهر العسل",
+    "base": "خشب الصندل"
   },
   {
     "id": "b1",
@@ -77,6 +101,9 @@
     "title": "Bag",
     "image": "https://i.ibb.co/V9Dtf9C/bag-2.jpg",
     "description": "كيس",
-    "price": "0"
+    "price": "0",
+    "top": "",
+    "heart": "",
+    "base": ""
   }
 ]

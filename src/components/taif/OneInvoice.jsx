@@ -1,17 +1,13 @@
 import React from "react";
-import { useEffect, useState, useRef } from "react";
+import { useRef } from "react";
 import { useReactToPrint } from "react-to-print";
-import { FaRegTrashAlt, FaPrint } from "react-icons/fa";
-// import { useNavigate } from "react-router-dom";
+import { FaPrint } from "react-icons/fa";
 
-// import { InvoiceToPrint } from "./InvoiceToPrint/InvoiceToPrint";
-// import Reback from "./Reback/Reback";
-
-import "./OneInvoice.css";
+import "../OneInvoice.css";
 
 import { createContext } from "react";
-import { totalBeforeAfterOfferType } from "../OfferFunction";
-import { ComponentToPrint } from "../ComponentToPrint/ComponentToPrint";
+import { totalBeforeAfterOfferType } from "../../OfferFunction";
+import { ComponentToPrint } from "./TaifComponentToPrint/TaifComponentToPrint";
 export const InvoiceContext = createContext();
 
 const OneInvoice = ({
@@ -29,26 +25,23 @@ const OneInvoice = ({
     paidandchange,
     dateMyPC,
     totalPrice,
-    off,
   } = todo;
-
-  const { codeE } = off;
-
   const { isOffer } = todo.off ? todo.off : "";
+
   const { change, paidMoney } = paidandchange;
   const serialNumber = invoiceNumber.sn;
   const timeInMyPC = todo.off ? dateMyPC : new Date(dateMyPC).toISOString();
+  // const timeInMyPC = new Date().toISOString();
 
-  const otherPrice = totalBeforeAfterOfferType(cartItems, codeE).otherPrice;
-  const perfumePrice = totalBeforeAfterOfferType(cartItems, codeE).after;
+  const otherPrice = totalBeforeAfterOfferType(cartItems).otherPrice;
+  const perfumePrice = totalBeforeAfterOfferType(cartItems).after;
 
-  const itemPriceBefore = totalBeforeAfterOfferType(cartItems, codeE).before;
+  const itemPriceBefore = totalBeforeAfterOfferType(cartItems).before;
 
   const itemsPrice = perfumePrice + otherPrice;
 
   const subtotal = perfumePrice + otherPrice;
-  // console.log("off", off);
-  // const subtotal = Math.round(todo.totalPrice);
+
   const totalItems = cartItems.reduce((a, c) => a + c.qty, 0);
 
   const componentRef = useRef();
@@ -60,20 +53,16 @@ const OneInvoice = ({
     handleReactToPrint();
   };
 
-  // const navigate = useNavigate();
-
-  // const rebackHandler = (todo) => {
-  //   readDataFromInvoiceComponent(todo);
-  //   navigate("/reback");
-  // };
-
   return (
     <div className="myOneInvoice">
       <p>{todo.invoiceNumber.sn}</p>
-      <p>{Number(((subtotal * 15) / 100 + subtotal).toFixed(2))}</p>
+      <p>{(subtotal * 15) / 100 + subtotal}</p>
+      <p>{subtotal}</p>
+      <p>{((subtotal * 15) / 100 + subtotal - subtotal).toFixed(2)}</p>
       <p>{totalItems}</p>
       <p>{methodArray.method}</p>
       <p>{todo.dateMyPC}</p>
+
       <p
         onClick={function () {
           handlePrint();
@@ -86,12 +75,6 @@ const OneInvoice = ({
       >
         <FaPrint />
       </p>
-      {/* <p onClick={() => handleEdit(todo.id, todo)}>
-          <FaEdit />
-        </p>
-        <Reback />
-        <p onClick={() => rebackHandler(todo)}>Edit</p> */}
-      {/* <button onClick={() => deleteTodo(todo.id)}>{<FaRegTrashAlt />}</button> */}
       <div style={{ display: "none" }}>
         <ComponentToPrint
           cartItems={cartItems}

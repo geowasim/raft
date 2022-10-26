@@ -74,7 +74,7 @@ export default function Payment(props) {
         {showCashe ? (
           <div>Mada / الرجوع إلى الدفع بالبطاقة</div>
         ) : (
-          <>cash/ لتغير إلى الدفع كاش</>
+          <div style={{ marginTop: "-8px" }}>cash/ لتغير إلى الدفع كاش</div>
         )}
       </button>
     </div>

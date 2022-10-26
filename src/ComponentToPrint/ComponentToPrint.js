@@ -2,11 +2,9 @@ import React from "react";
 import { Buffer } from "buffer";
 
 import OfferComponent from "../OffersComponent/OfferComponent";
-// import QRCode from "qrcode.react";
 import QRCode from "react-qr-code";
 
 import "./ComponentToPrint.css";
-import { getTLVForValue } from "./BarcodeFunction";
 import { Invoice } from "@axenda/zatca";
 
 export const ComponentToPrint = React.forwardRef((props, ref) => {
@@ -38,37 +36,6 @@ export const ComponentToPrint = React.forwardRef((props, ref) => {
     invoiceVatTotal: totalVat,
   });
 
-  //----------------
-
-  /**
-   * 
-   //1.Seller Name
-   let sellerNameBuf = getTLVForValue("1", "Alnathra Al-Raqiqa");
-   //2.Vat Registration
-   let vatRegistrationNameBuf = getTLVForValue("2", "310430668500003");
-   //Seller Name
-   let timeStampBuf = getTLVForValue("3", timeBuf);
-   //Seller Name
-   let taxTotalNameBuf = getTLVForValue("4", totalWithVat);
-   //Seller Name
-   let vatTotalBuf = getTLVForValue("5", totalVat);
-   
-   let tagsBufsArray = [
-     sellerNameBuf,
-     vatRegistrationNameBuf,
-     timeStampBuf,
-     taxTotalNameBuf,
-     vatTotalBuf,
-    ];
-    
-    let qrCodeBuf = Buffer.concat(tagsBufsArray);
-    let qrCodeB64 = qrCodeBuf.toString("base64");
-    
-    */
-  //-------------
-
-  // console.log("itemsPrice", itemsPrice);
-  // console.log("itemsPriceBefore", itemPriceBefore);
   return (
     <div className="fatorah" ref={ref}>
       <div className="com_title">
@@ -165,17 +132,17 @@ export const ComponentToPrint = React.forwardRef((props, ref) => {
               <div className="L1">
                 <p>Discount *</p>
                 <p>
-                  <b>{Math.ceil(itemsPrice) - itemPriceBefore} SAR</b>
+                  <b>{itemsPrice - itemPriceBefore} SAR</b>
                 </p>
               </div>
             )}
             <div className="L1">
               <p>Total without VAT </p>
-              <p>{Math.ceil(itemsPrice)} SAR</p>
+              <p>{itemsPrice} SAR</p>
             </div>
             <div className="L1">
               <p>VAT 15%</p>
-              <p>{Math.ceil(itemsPrice * 15) / 100} SAR </p>
+              <p>{Number(((itemsPrice * 15) / 100).toFixed(2))} SAR </p>
             </div>
             <div className="L1" style={{ fontSize: "12px" }}>
               <p
@@ -190,7 +157,7 @@ export const ComponentToPrint = React.forwardRef((props, ref) => {
                 <span>Total Amount include VAT:</span>{" "}
               </p>
               <h4 style={{ fontSize: "14px" }}>
-                {(itemsPrice * 15) / 100 + itemsPrice} SAR
+                {Number(((itemsPrice * 15) / 100 + itemsPrice).toFixed(2))} SAR
               </h4>
             </div>
             <div className="L1">
@@ -200,7 +167,13 @@ export const ComponentToPrint = React.forwardRef((props, ref) => {
             {method === "Mada" ? (
               <div className="L1">
                 <p> Received: المبلغ المستلم</p>
-                <p> {(itemsPrice * 15) / 100 + itemsPrice} SAR</p>
+                <p>
+                  {" "}
+                  {Number(
+                    ((itemsPrice * 15) / 100 + itemsPrice).toFixed(2)
+                  )}{" "}
+                  SAR
+                </p>
               </div>
             ) : (
               <>
@@ -221,16 +194,8 @@ export const ComponentToPrint = React.forwardRef((props, ref) => {
       </div>
       <hr />
       <br />
-      <OfferComponent codeE={"HAS432"} />
-      {/* <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          marginTop: "15px",
-        }}
-      >
-        <QRCode value={qrCodeB64} />
-      </div> */}
+      <OfferComponent codeE={"RYD1122"} />
+      <hr />
       <br />
       <div
         className="qr-container"

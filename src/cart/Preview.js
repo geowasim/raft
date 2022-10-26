@@ -14,7 +14,6 @@ const Preview = React.forwardRef((props, ref) => {
     codeE,
     itemPriceBefore,
   } = props;
-
   return (
     <div
       className="fatorah-p"
@@ -107,13 +106,13 @@ const Preview = React.forwardRef((props, ref) => {
               <div className="L1-p">
                 <p>Discount *</p>
                 <p>
-                  <b>{Math.ceil(itemsPrice) - itemPriceBefore} SAR</b>
+                  <b>{itemsPrice - itemPriceBefore} SAR</b>
                 </p>
               </div>
             )}
             <div className="L1-p">
               <p>Subtotal without VAT </p>
-              <p>{Math.ceil(itemsPrice)} SAR</p>
+              <p>{itemsPrice} SAR</p>
             </div>
             <div className="L1-p">
               <p>VAT 15%</p>
@@ -132,7 +131,7 @@ const Preview = React.forwardRef((props, ref) => {
                 <span>Total Amount include VAT:</span>{" "}
               </p>
               <h4 style={{ fontSize: "20px", color: "red" }}>
-                {(itemsPrice * 15) / 100 + itemsPrice} SAR
+                {Number(((itemsPrice * 15) / 100 + itemsPrice).toFixed(2))} SAR
               </h4>
             </div>
             <div className="L1-p">
@@ -150,7 +149,13 @@ const Preview = React.forwardRef((props, ref) => {
             {method === "Mada" ? (
               <div className="L1-p">
                 <p> Received: المبلغ المستلم</p>
-                <p> {(itemsPrice * 15) / 100 + itemsPrice} SAR</p>
+                <p>
+                  {" "}
+                  {Number(
+                    ((itemsPrice * 15) / 100 + itemsPrice).toFixed(2)
+                  )}{" "}
+                  SAR
+                </p>
               </div>
             ) : (
               <>
@@ -172,7 +177,7 @@ const Preview = React.forwardRef((props, ref) => {
         <br />
       </div>
       <hr />
-      <OfferComponent codeE={"HAS432"} />
+      <OfferComponent codeE={"RYD1122"} />
       {/* <div className="welcome">
         <p style={{ marginTop: "10px" }}> نشكركم لاختياركم منتجاتنا </p>
         <p> Thank you for choosing our products</p>
