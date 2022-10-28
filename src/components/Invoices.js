@@ -71,7 +71,20 @@ function Invoices(props) {
 
   const total = todos.reduce((a, c) => a + c.totalPrice, 0);
   const soldItems = todos.reduce((a, c) => a + c.totalItems, 0);
-
+  if (todos.length === 0) {
+    return (
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignContent: "center",
+          height: "98vh",
+        }}
+      >
+        <h3>loading....</h3>
+      </div>
+    );
+  }
   return (
     <div className={`${style.bg} invoices`}>
       <div className={style.container}>
